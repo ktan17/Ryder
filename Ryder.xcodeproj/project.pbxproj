@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		23D6D0ABD13AD5B54135CC95 /* Pods_Ryder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17950AD1DA3B0740AE99E02F /* Pods_Ryder.framework */; };
 		A89CAF5A20702C5A004A59E5 /* TicketViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89CAF5920702C5A004A59E5 /* TicketViewCell.swift */; };
-		A89CAF5C20702DC4004A59E5 /* TicketView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A89CAF5B20702DC4004A59E5 /* TicketView.xib */; };
+		A89CAF5C20702DC4004A59E5 /* TicketViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A89CAF5B20702DC4004A59E5 /* TicketViewCell.xib */; };
 		A89CAF7520702FD6004A59E5 /* fonts.scale in Resources */ = {isa = PBXBuildFile; fileRef = A89CAF5E20702FD6004A59E5 /* fonts.scale */; };
 		A89CAF7620702FD6004A59E5 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A89CAF5F20702FD6004A59E5 /* Poppins-ExtraLight.ttf */; };
 		A89CAF7720702FD6004A59E5 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A89CAF6020702FD6004A59E5 /* Poppins-ThinItalic.ttf */; };
@@ -42,6 +42,7 @@
 		EED1881B206F5E5100E85ACB /* RyderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED1881A206F5E5100E85ACB /* RyderUITests.swift */; };
 		EED1882A2070257100E85ACB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EED188292070257100E85ACB /* GoogleService-Info.plist */; };
 		EED1882C2070277C00E85ACB /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED1882B2070277C00E85ACB /* Globals.swift */; };
+		EED1883120703B0400E85ACB /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED1883020703B0400E85ACB /* Vehicle.swift */; };
 		F5977BFF24857003190636F3 /* Pods_RyderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D0505D55DD511E29289C57 /* Pods_RyderTests.framework */; };
 		F7A4A76A16770A68613FE674 /* Pods_RyderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79754A742EC390B2CFFCB80D /* Pods_RyderUITests.framework */; };
 /* End PBXBuildFile section */
@@ -74,7 +75,7 @@
 		820A91D1DDB4CC6C3C51459A /* Pods-Ryder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ryder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ryder/Pods-Ryder.debug.xcconfig"; sourceTree = "<group>"; };
 		A0B0921D7D0EDA36D595F8E1 /* Pods-RyderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RyderTests/Pods-RyderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A89CAF5920702C5A004A59E5 /* TicketViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketViewCell.swift; sourceTree = "<group>"; };
-		A89CAF5B20702DC4004A59E5 /* TicketView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketView.xib; sourceTree = "<group>"; };
+		A89CAF5B20702DC4004A59E5 /* TicketViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketViewCell.xib; sourceTree = "<group>"; };
 		A89CAF5E20702FD6004A59E5 /* fonts.scale */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fonts.scale; sourceTree = "<group>"; };
 		A89CAF5F20702FD6004A59E5 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		A89CAF6020702FD6004A59E5 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
@@ -114,6 +115,7 @@
 		EED188292070257100E85ACB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EED1882B2070277C00E85ACB /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		EED1882D2070282B00E85ACB /* Ryder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ryder.entitlements; sourceTree = "<group>"; };
+		EED1883020703B0400E85ACB /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 				EED1882D2070282B00E85ACB /* Ryder.entitlements */,
 				EED187FA206F5E5000E85ACB /* AppDelegate.swift */,
 				EED1882B2070277C00E85ACB /* Globals.swift */,
+				EED1882F20703AF500E85ACB /* Models */,
 				EED18828207016E300E85ACB /* View Controllers */,
 				EED187FE206F5E5000E85ACB /* Main.storyboard */,
 				EED18803206F5E5000E85ACB /* LaunchScreen.storyboard */,
@@ -258,10 +261,18 @@
 			isa = PBXGroup;
 			children = (
 				EED187FC206F5E5000E85ACB /* MainTableViewController.swift */,
+				A89CAF5B20702DC4004A59E5 /* TicketViewCell.xib */,
 				A89CAF5920702C5A004A59E5 /* TicketViewCell.swift */,
-				A89CAF5B20702DC4004A59E5 /* TicketView.xib */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		EED1882F20703AF500E85ACB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EED1883020703B0400E85ACB /* Vehicle.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,7 +420,7 @@
 				A89CAF8920702FD6004A59E5 /* fonts.list in Resources */,
 				A89CAF8A20702FD6004A59E5 /* Poppins-Italic.ttf in Resources */,
 				A89CAF8020702FD6004A59E5 /* Poppins-BlackItalic.ttf in Resources */,
-				A89CAF5C20702DC4004A59E5 /* TicketView.xib in Resources */,
+				A89CAF5C20702DC4004A59E5 /* TicketViewCell.xib in Resources */,
 				A89CAF7720702FD6004A59E5 /* Poppins-ThinItalic.ttf in Resources */,
 				A89CAF8720702FD6004A59E5 /* Poppins-SemiBold.ttf in Resources */,
 				EED18800206F5E5000E85ACB /* Main.storyboard in Resources */,
@@ -596,6 +607,7 @@
 				EED187FD206F5E5000E85ACB /* MainTableViewController.swift in Sources */,
 				A89CAF5A20702C5A004A59E5 /* TicketViewCell.swift in Sources */,
 				EED187FB206F5E5000E85ACB /* AppDelegate.swift in Sources */,
+				EED1883120703B0400E85ACB /* Vehicle.swift in Sources */,
 				EED1882C2070277C00E85ACB /* Globals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
