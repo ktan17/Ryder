@@ -18,6 +18,8 @@ class TicketViewCell: UITableViewCell {
     @IBOutlet var nextLabel: UILabel!
     @IBOutlet var nextLocationLabel: UILabel!
     
+    @IBOutlet var topLine: UIView!
+    @IBOutlet var bottomLine: UIView!
     
     
 }
