@@ -1,0 +1,557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EED187FB206F5E5000E85ACB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED187FA206F5E5000E85ACB /* AppDelegate.swift */; };
+		EED187FD206F5E5000E85ACB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED187FC206F5E5000E85ACB /* ViewController.swift */; };
+		EED18800206F5E5000E85ACB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EED187FE206F5E5000E85ACB /* Main.storyboard */; };
+		EED18802206F5E5000E85ACB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EED18801206F5E5000E85ACB /* Assets.xcassets */; };
+		EED18805206F5E5000E85ACB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EED18803206F5E5000E85ACB /* LaunchScreen.storyboard */; };
+		EED18810206F5E5000E85ACB /* RyderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED1880F206F5E5000E85ACB /* RyderTests.swift */; };
+		EED1881B206F5E5100E85ACB /* RyderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED1881A206F5E5100E85ACB /* RyderUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EED1880C206F5E5000E85ACB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EED187EF206F5E4F00E85ACB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EED187F6206F5E5000E85ACB;
+			remoteInfo = Ryder;
+		};
+		EED18817206F5E5000E85ACB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EED187EF206F5E4F00E85ACB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EED187F6206F5E5000E85ACB;
+			remoteInfo = Ryder;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EED187F7206F5E5000E85ACB /* Ryder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EED187FA206F5E5000E85ACB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EED187FC206F5E5000E85ACB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EED187FF206F5E5000E85ACB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EED18801206F5E5000E85ACB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EED18804206F5E5000E85ACB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EED18806206F5E5000E85ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EED1880B206F5E5000E85ACB /* RyderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RyderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EED1880F206F5E5000E85ACB /* RyderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyderTests.swift; sourceTree = "<group>"; };
+		EED18811206F5E5000E85ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EED18816206F5E5000E85ACB /* RyderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RyderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EED1881A206F5E5100E85ACB /* RyderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyderUITests.swift; sourceTree = "<group>"; };
+		EED1881C206F5E5100E85ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EED187F4206F5E5000E85ACB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EED18808206F5E5000E85ACB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EED18813206F5E5000E85ACB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EED187EE206F5E4F00E85ACB = {
+			isa = PBXGroup;
+			children = (
+				EED187F9206F5E5000E85ACB /* Ryder */,
+				EED1880E206F5E5000E85ACB /* RyderTests */,
+				EED18819206F5E5000E85ACB /* RyderUITests */,
+				EED187F8206F5E5000E85ACB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EED187F8206F5E5000E85ACB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EED187F7206F5E5000E85ACB /* Ryder.app */,
+				EED1880B206F5E5000E85ACB /* RyderTests.xctest */,
+				EED18816206F5E5000E85ACB /* RyderUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EED187F9206F5E5000E85ACB /* Ryder */ = {
+			isa = PBXGroup;
+			children = (
+				EED187FA206F5E5000E85ACB /* AppDelegate.swift */,
+				EED187FC206F5E5000E85ACB /* ViewController.swift */,
+				EED187FE206F5E5000E85ACB /* Main.storyboard */,
+				EED18801206F5E5000E85ACB /* Assets.xcassets */,
+				EED18803206F5E5000E85ACB /* LaunchScreen.storyboard */,
+				EED18806206F5E5000E85ACB /* Info.plist */,
+			);
+			path = Ryder;
+			sourceTree = "<group>";
+		};
+		EED1880E206F5E5000E85ACB /* RyderTests */ = {
+			isa = PBXGroup;
+			children = (
+				EED1880F206F5E5000E85ACB /* RyderTests.swift */,
+				EED18811206F5E5000E85ACB /* Info.plist */,
+			);
+			path = RyderTests;
+			sourceTree = "<group>";
+		};
+		EED18819206F5E5000E85ACB /* RyderUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EED1881A206F5E5100E85ACB /* RyderUITests.swift */,
+				EED1881C206F5E5100E85ACB /* Info.plist */,
+			);
+			path = RyderUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EED187F6206F5E5000E85ACB /* Ryder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EED1881F206F5E5100E85ACB /* Build configuration list for PBXNativeTarget "Ryder" */;
+			buildPhases = (
+				EED187F3206F5E5000E85ACB /* Sources */,
+				EED187F4206F5E5000E85ACB /* Frameworks */,
+				EED187F5206F5E5000E85ACB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ryder;
+			productName = Ryder;
+			productReference = EED187F7206F5E5000E85ACB /* Ryder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EED1880A206F5E5000E85ACB /* RyderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EED18822206F5E5100E85ACB /* Build configuration list for PBXNativeTarget "RyderTests" */;
+			buildPhases = (
+				EED18807206F5E5000E85ACB /* Sources */,
+				EED18808206F5E5000E85ACB /* Frameworks */,
+				EED18809206F5E5000E85ACB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EED1880D206F5E5000E85ACB /* PBXTargetDependency */,
+			);
+			name = RyderTests;
+			productName = RyderTests;
+			productReference = EED1880B206F5E5000E85ACB /* RyderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EED18815206F5E5000E85ACB /* RyderUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EED18825206F5E5100E85ACB /* Build configuration list for PBXNativeTarget "RyderUITests" */;
+			buildPhases = (
+				EED18812206F5E5000E85ACB /* Sources */,
+				EED18813206F5E5000E85ACB /* Frameworks */,
+				EED18814206F5E5000E85ACB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EED18818206F5E5000E85ACB /* PBXTargetDependency */,
+			);
+			name = RyderUITests;
+			productName = RyderUITests;
+			productReference = EED18816206F5E5000E85ACB /* RyderUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EED187EF206F5E4F00E85ACB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Kevin Tan";
+				TargetAttributes = {
+					EED187F6206F5E5000E85ACB = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					EED1880A206F5E5000E85ACB = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EED187F6206F5E5000E85ACB;
+					};
+					EED18815206F5E5000E85ACB = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EED187F6206F5E5000E85ACB;
+					};
+				};
+			};
+			buildConfigurationList = EED187F2206F5E4F00E85ACB /* Build configuration list for PBXProject "Ryder" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EED187EE206F5E4F00E85ACB;
+			productRefGroup = EED187F8206F5E5000E85ACB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EED187F6206F5E5000E85ACB /* Ryder */,
+				EED1880A206F5E5000E85ACB /* RyderTests */,
+				EED18815206F5E5000E85ACB /* RyderUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EED187F5206F5E5000E85ACB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EED18805206F5E5000E85ACB /* LaunchScreen.storyboard in Resources */,
+				EED18802206F5E5000E85ACB /* Assets.xcassets in Resources */,
+				EED18800206F5E5000E85ACB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EED18809206F5E5000E85ACB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EED18814206F5E5000E85ACB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EED187F3206F5E5000E85ACB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EED187FD206F5E5000E85ACB /* ViewController.swift in Sources */,
+				EED187FB206F5E5000E85ACB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EED18807206F5E5000E85ACB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EED18810206F5E5000E85ACB /* RyderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EED18812206F5E5000E85ACB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EED1881B206F5E5100E85ACB /* RyderUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EED1880D206F5E5000E85ACB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EED187F6206F5E5000E85ACB /* Ryder */;
+			targetProxy = EED1880C206F5E5000E85ACB /* PBXContainerItemProxy */;
+		};
+		EED18818206F5E5000E85ACB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EED187F6206F5E5000E85ACB /* Ryder */;
+			targetProxy = EED18817206F5E5000E85ACB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EED187FE206F5E5000E85ACB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EED187FF206F5E5000E85ACB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EED18803206F5E5000E85ACB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EED18804206F5E5000E85ACB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EED1881D206F5E5100E85ACB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EED1881E206F5E5100E85ACB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EED18820206F5E5100E85ACB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Ryder/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.GENT.Ryder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EED18821206F5E5100E85ACB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Ryder/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.GENT.Ryder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EED18823206F5E5100E85ACB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RyderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.GENT.RyderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ryder.app/Ryder";
+			};
+			name = Debug;
+		};
+		EED18824206F5E5100E85ACB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RyderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.GENT.RyderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ryder.app/Ryder";
+			};
+			name = Release;
+		};
+		EED18826206F5E5100E85ACB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RyderUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.GENT.RyderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Ryder;
+			};
+			name = Debug;
+		};
+		EED18827206F5E5100E85ACB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RyderUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.GENT.RyderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Ryder;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EED187F2206F5E4F00E85ACB /* Build configuration list for PBXProject "Ryder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EED1881D206F5E5100E85ACB /* Debug */,
+				EED1881E206F5E5100E85ACB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EED1881F206F5E5100E85ACB /* Build configuration list for PBXNativeTarget "Ryder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EED18820206F5E5100E85ACB /* Debug */,
+				EED18821206F5E5100E85ACB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EED18822206F5E5100E85ACB /* Build configuration list for PBXNativeTarget "RyderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EED18823206F5E5100E85ACB /* Debug */,
+				EED18824206F5E5100E85ACB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EED18825206F5E5100E85ACB /* Build configuration list for PBXNativeTarget "RyderUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EED18826206F5E5100E85ACB /* Debug */,
+				EED18827206F5E5100E85ACB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EED187EF206F5E4F00E85ACB /* Project object */;
+}
