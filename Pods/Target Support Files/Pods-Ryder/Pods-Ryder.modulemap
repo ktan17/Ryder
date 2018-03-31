@@ -1,0 +1,6 @@
+framework module Pods_Ryder {
+  umbrella header "Pods-Ryder-umbrella.h"
+
+  export *
+  module * { export * }
+}
