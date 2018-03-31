@@ -98,10 +98,10 @@
 			isa = PBXGroup;
 			children = (
 				EED187FA206F5E5000E85ACB /* AppDelegate.swift */,
-				EED187FC206F5E5000E85ACB /* ViewController.swift */,
+				EED18828207016E300E85ACB /* View Controllers */,
 				EED187FE206F5E5000E85ACB /* Main.storyboard */,
-				EED18801206F5E5000E85ACB /* Assets.xcassets */,
 				EED18803206F5E5000E85ACB /* LaunchScreen.storyboard */,
+				EED18801206F5E5000E85ACB /* Assets.xcassets */,
 				EED18806206F5E5000E85ACB /* Info.plist */,
 			);
 			path = Ryder;
@@ -123,6 +123,14 @@
 				EED1881C206F5E5100E85ACB /* Info.plist */,
 			);
 			path = RyderUITests;
+			sourceTree = "<group>";
+		};
+		EED18828207016E300E85ACB /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EED187FC206F5E5000E85ACB /* ViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
