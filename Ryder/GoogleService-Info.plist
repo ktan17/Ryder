@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>633580651443-r43qqbo2rt79ae1qh9hnpuo9lq26v2r5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.633580651443-r43qqbo2rt79ae1qh9hnpuo9lq26v2r5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAxopQneC5Enb6Vvahu9hfZjaYw5PPGVzs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>633580651443</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.GENT.Ryder</string>
+	<key>PROJECT_ID</key>
+	<string>lahacks18-ryder</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lahacks18-ryder.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:633580651443:ios:91c246923904dfac</string>
+	<key>DATABASE_URL</key>
+	<string>https://lahacks18-ryder.firebaseio.com</string>
+</dict>
+</plist>
