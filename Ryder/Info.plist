@@ -34,6 +34,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Ryder needs your location to find transit vehicles around you</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Ryder needs your location to find transit vehicles around you</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Ryder needs your location to find transit vehicles around you</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
