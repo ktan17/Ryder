@@ -10,7 +10,7 @@ import UIKit
 import FirebaseFirestore
 
 class TicketDetailView: UIScrollView {
-    
+
     var m_vehicle: Vehicle!
     var logoImageView: UIImageView!
     var transitTypeLabel: UILabel!
@@ -31,11 +31,11 @@ class TicketDetailView: UIScrollView {
     let padding: CGFloat = 20
     
 //    init(vehicle: Vehicle, allStops: [Vehicle.RouteStopData], parent: UIViewController) {
-    init(vehicle: Vehicle, parent: UIView) {
+    init(vehicle: Vehicle, parentFrame: UIView) {
         self.m_vehicle = vehicle
         let statusBar = UIApplication.shared.statusBarFrame
         
-        super.init(frame: CGRect(x: padding, y: statusBar.height + padding/2, width: parent.frame.width - 2 * padding, height: parent.frame.height - 2 * padding))
+        super.init(frame: CGRect(x: padding, y: statusBar.height + padding/2, width: parentFrame.frame.width - 2 * padding, height: parentFrame.frame.height - 2 * padding))
         self.layer.cornerRadius = 8
         self.clipsToBounds = true
         
@@ -188,6 +188,5 @@ class TicketDetailView: UIScrollView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 }
