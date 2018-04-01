@@ -39,6 +39,8 @@ class RouteStop: UIView {
         
         self.stopLabel.center.y = self.frame.height / 2
         
+        self.addSubview(self.stopLabel)
+        
         // dot + line construction
         self.dotView = UIView(frame: CGRect(x: viewWidth*2/3, y: origin.y, width: dotDiameter, height: dotDiameter))
         self.dotView.clipsToBounds = true
@@ -54,7 +56,6 @@ class RouteStop: UIView {
         self.timeLabel.frame = CGRect(x: viewWidth - self.timeLabel.frame.width, y: self.frame.height / 2 - self.timeLabel.frame.height / 2, width: self.timeLabel.frame.width, height: self.timeLabel.frame.height)
         self.timeLabel.center.y = self.frame.height / 2
         
-        self.addSubview(self.stopLabel)
         self.addSubview(dotView)
         self.addSubview(lineView)
         self.addSubview(self.timeLabel)

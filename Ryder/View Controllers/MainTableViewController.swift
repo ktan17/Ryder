@@ -43,6 +43,8 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         super.viewDidAppear(animated)
         
         self.beaconManager.startListening()
+        vehiclesInRange.append(Vehicle(id: "31", nextStop: "42 St. / Sepulveda Blvd.", type: "Bus"))
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -131,7 +133,8 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("im gay")
+        let noodle = TicketDetailView(vehicle: vehiclesInRange[indexPath.row], parent: self)
+        self.navigationController?.view.addSubview(noodle)
     }
     
     // MARK: GMBLBeaconManagerDelegate methods
