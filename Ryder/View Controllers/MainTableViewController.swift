@@ -15,18 +15,20 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     private let cellPadding: CGFloat = 9
     
     lazy var beaconManager = GMBLBeaconManager()
-    var vehiclesInRange = [Vehicle]()
-    var timeouts = [String : Int]()
+    lazy var refresh: UIRefreshControl! = createRefreshControl()
     
+    var vehiclesInRange = [Vehicle]()
+    
+    var timeouts = [String : Int]()
     var timer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+
         let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 202, height: 66))
         self.navigationItem.titleView = containerView
-        print(self.navigationController?.navigationBar.backgroundColor)
+        
         self.navigationController?.navigationBar.layer.masksToBounds = false
         self.navigationController?.navigationBar.layer.shadowColor = Charcoal.cgColor
         self.navigationController?.navigationBar.layer.shadowRadius = 4
@@ -37,8 +39,8 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         let titleImageView = UIImageView(image: title)
         titleImageView.contentMode = .scaleAspectFit
         
-        let titleWidth: CGFloat = containerView.frame.width*0.4, titleHeight: CGFloat = containerView.frame.height*0.4
-        titleImageView.frame = CGRect(x: containerView.frame.width/2 - titleWidth/2, y: containerView.frame.height/2 - titleHeight*0.8, width: titleWidth, height: titleHeight)
+        let titleWidth: CGFloat = containerView.frame.width*0.5, titleHeight: CGFloat = containerView.frame.height*0.5
+        titleImageView.frame = CGRect(x: containerView.frame.width/2 - titleWidth/2, y: containerView.frame.height/2 - titleHeight*0.875, width: titleWidth, height: titleHeight)
         containerView.addSubview(titleImageView)
 
         self.beaconManager.delegate = self
@@ -53,6 +55,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         super.viewDidAppear(animated)
         
         self.beaconManager.startListening()
+        self.beginRefreshingControl()
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,21 +77,57 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         tableView.reloadSections(set, with: .automatic)
     }
     
+    private func createRefreshControl() -> UIRefreshControl {
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        label.text = "Searching for nearby vehicles... Hang tight!"
+        label.font = UIFont(name: "Poppins-LightItalic", size: 14)
+        label.textColor = UIColor(white: 0.6, alpha: 1.0)
+        label.sizeToFit()
+        
+        let control = UIRefreshControl()
+        control.frame.size = CGSize(width: control.frame.width, height: control.frame.height + 10)
+        label.center = CGPoint(x: control.frame.width/2, y: control.frame.height)
+        label.tag = 1
+        control.addSubview(label)
+        
+        return control
+        
+    }
+    
+    private func beginRefreshingControl() {
+        refresh = createRefreshControl()
+        tableView.refreshControl = self.refresh
+        
+        if let label = self.refresh.viewWithTag(1) as? UILabel {
+            label.center.x = self.refresh.frame.width/2
+        }
+        
+        refresh.beginRefreshing()
+        self.tableView.setContentOffset(CGPoint(x: 0, y: -refresh.frame.size.height), animated: true)
+        self.tableView.isUserInteractionEnabled = false
+    }
+    
     @objc func timerAction(_ sender: Timer!) {
         
         for key in timeouts.keys {
             timeouts[key]! -= 1
-
+            print(key + " " + String(timeouts[key]!))
             if timeouts[key]! <= 0 {
-                timer.invalidate()
-                timer = nil
                 
-                timeouts.removeValue(forKey: key)
                 if let index = vehiclesInRange.index(where: { $0.id == key}) {
                     vehiclesInRange.remove(at: index)
-                    
                     self.reloadTickets()
                 }
+                
+                timeouts.removeValue(forKey: key)
+                if timeouts.isEmpty {
+                    timer.invalidate()
+                    timer = nil
+                    
+                    self.beginRefreshingControl()
+                }
+                
             }
         }
         
@@ -158,10 +197,18 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                 if let snapshot = snapshot, let type = snapshot.data()?["type"] as? String {
                     let vehicle = Vehicle(id: id, nextStop: nextStop, type: type)
                     self.vehiclesInRange.append(vehicle)
-                    self.reloadTickets()
-                    
-                    self.timeouts[id] = 10
-                    self.beginTiming()
+                    DispatchQueue.main.async {
+                        self.reloadTickets()
+                        if let control = self.refresh {
+                            control.endRefreshing()
+                            let when = DispatchTime.now() + 0.5
+                            DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                                self.tableView.refreshControl = nil
+                                self.refresh = nil
+                                self.tableView.isUserInteractionEnabled = true
+                            })
+                        }
+                    }
                 }
             }
         }
@@ -169,29 +216,31 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         guard let identifier = sighting.beacon.identifier else {
             return
         }
-
-        if !timeouts.keys.contains(identifier) {
-            Firestore.firestore().collection("vehicles").getDocuments { (snapshot, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                
-                if let snapshot = snapshot {
-                    for document in snapshot.documents {
-                        if let id = document.data()["beaconID"] as? String,
-                            id == identifier,
-                            let nextStop = document.data()["nextStop"] as? String,
-                            let routeRef = document.data()["route"] as? DocumentReference {
-
-                            getRoute(from: routeRef, id: id, nextStop: nextStop)
-                            
+        
+        if !self.timeouts.keys.contains(identifier) {
+            
+            DispatchQueue.global(qos: .background).async {
+                Firestore.firestore().collection("vehicles").getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    
+                    if let snapshot = snapshot {
+                        for document in snapshot.documents {
+                            if let id = document.data()["beaconID"] as? String,
+                                id == identifier,
+                                let nextStop = document.data()["nextStop"] as? String,
+                                let routeRef = document.data()["route"] as? DocumentReference {
+                                getRoute(from: routeRef, id: id, nextStop: nextStop)
+                            }
                         }
                     }
                 }
             }
+            
         }
-        
+       
         timeouts[identifier] = 10
         beginTiming()
         

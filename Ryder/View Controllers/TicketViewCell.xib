@@ -124,6 +124,12 @@
                             <constraint firstItem="yZm-Au-n6c" firstAttribute="centerY" secondItem="6Xw-nD-ShT" secondAttribute="centerY" id="plz-Nf-xzO"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EASTBOUND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiD-4b-6AC">
+                        <rect key="frame" x="227.5" y="158.5" width="93.5" height="22.5"/>
+                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="vnI-xN-h31" firstAttribute="trailing" secondItem="0Ny-Ch-2fA" secondAttribute="trailing" constant="5" id="7Fh-ld-mjg"/>
@@ -131,6 +137,7 @@
                     <constraint firstItem="fGT-9n-lpd" firstAttribute="leading" secondItem="BXT-B8-cnW" secondAttribute="leading" id="Ibq-tb-c76"/>
                     <constraint firstItem="vnI-xN-h31" firstAttribute="centerX" secondItem="dYw-ed-h89" secondAttribute="centerX" id="J1w-nL-3Vi"/>
                     <constraint firstItem="BXT-B8-cnW" firstAttribute="leading" secondItem="yZm-Au-n6c" secondAttribute="leading" id="P88-aN-HyI"/>
+                    <constraint firstItem="vnI-xN-h31" firstAttribute="trailing" secondItem="PiD-4b-6AC" secondAttribute="trailing" constant="13" id="Pca-Os-Bet"/>
                     <constraint firstItem="BXT-B8-cnW" firstAttribute="top" secondItem="0Ny-Ch-2fA" secondAttribute="bottom" constant="10" id="U4o-F4-MGD"/>
                     <constraint firstItem="L4c-7a-5xH" firstAttribute="leading" secondItem="vnI-xN-h31" secondAttribute="leading" constant="3" id="W90-S3-ic8"/>
                     <constraint firstItem="fGT-9n-lpd" firstAttribute="top" secondItem="BXT-B8-cnW" secondAttribute="bottom" constant="5" id="XPm-MT-ree"/>
@@ -140,6 +147,7 @@
                     <constraint firstItem="6Xw-nD-ShT" firstAttribute="top" secondItem="vnI-xN-h31" secondAttribute="top" constant="3" id="eCz-OZ-5Rk"/>
                     <constraint firstItem="L4c-7a-5xH" firstAttribute="top" secondItem="6Xw-nD-ShT" secondAttribute="bottom" id="kah-sw-GxA"/>
                     <constraint firstItem="0Ny-Ch-2fA" firstAttribute="top" secondItem="L4c-7a-5xH" secondAttribute="bottom" constant="3" id="oAD-p0-sOW"/>
+                    <constraint firstItem="vnI-xN-h31" firstAttribute="bottom" secondItem="PiD-4b-6AC" secondAttribute="bottom" constant="13" id="tAj-6X-Uy8"/>
                     <constraint firstItem="6Xw-nD-ShT" firstAttribute="leading" secondItem="vnI-xN-h31" secondAttribute="leading" id="u1V-gN-ZcC"/>
                 </constraints>
             </tableViewCellContentView>
