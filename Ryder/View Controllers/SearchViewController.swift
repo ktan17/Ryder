@@ -277,7 +277,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
                                     }
                                     
                                 }
-                                let when = DispatchTime.now() + 0.2
+                                let when = DispatchTime.now() + 0.3
                                 DispatchQueue.main.asyncAfter(deadline: when, execute: {
                                     self.searchFailed = self.results.isEmpty
                                     self.searchBar.resignFirstResponder()
