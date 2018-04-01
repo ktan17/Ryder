@@ -20,15 +20,16 @@ class Vehicle: NSObject {
     var type: String
     var routeNumber: String
     var direction: String
-    var routeStops = [RouteStopData]()
+    var routeStops: [RouteStopData]
     var isStarred = false
     
-    init(id: String, nextStop: String, type: String, direction: String, routeNumber: String) {
+    init(id: String, nextStop: String, type: String, direction: String, routeNumber: String, routeStops: [RouteStopData]) {
         self.id = id
         self.nextStop = nextStop
         self.type = type
-        self.direction = direction
         self.routeNumber = routeNumber
+        self.direction = direction
+        self.routeStops = routeStops
         
         super.init()
     }
