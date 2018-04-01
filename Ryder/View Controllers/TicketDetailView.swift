@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
-class TicketDetailViewController: UIView {
+class TicketDetailView: UIView {
     
     var logoImageView: UIImageView!
     var transitTypeLabel: UILabel!
@@ -34,7 +35,7 @@ class TicketDetailViewController: UIView {
         
         topLine = UIView(frame: CGRect(x: 0, y: 42, width: 313, height: 3))
         bottomLine = UIView(frame: CGRect(x: 13, y: 48, width: 313, height: 2))
-
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
