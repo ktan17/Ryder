@@ -13,3 +13,8 @@ struct APIKEYS {
 }
 
 let Charcoal = UIColor(red: 67/255, green: 67/255, blue: 67/255, alpha: 1)
+
+struct NextDest {
+    static let nextBus = "NEXT STOP"
+    static let nextTrain = "NEXT STATION"
+}

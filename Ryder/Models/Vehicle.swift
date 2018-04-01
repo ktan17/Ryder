@@ -16,6 +16,7 @@ class Vehicle: NSObject {
     var nextStop: String
     var type: String
     var time: Double = 0.0
+    var isStarred: Bool
     
     init(id: String, nextStop: String, type: String) {
         self.id = id
