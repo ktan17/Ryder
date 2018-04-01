@@ -24,6 +24,8 @@ class TicketDetailView: UIScrollView {
     var directionLabel: UILabel!
     var mapView: UIImageView!
     
+    var routeArray = [RouteStop]()
+    
     var topLine: UIView!
     var bottomLine: UIView!
     
@@ -138,6 +140,22 @@ class TicketDetailView: UIScrollView {
             self.addSubview(starImageView)
         }
         
+        // route stops
+        // FOR TEST
+        let rs1 = RouteStop(origin: CGPoint.init(x: mapPadding, y: mapView.frame.maxY + 22), stopLabel: "Westwood SB & Lindbrook NS", timeLabel: "1:36 PM")
+        self.addSubview(rs1)
+        
+        let rs2 = RouteStop(origin: CGPoint.init(x: mapPadding, y: rs1.frame.maxY), stopLabel: "Wilshire/Federal", timeLabel: "12:02 AM")
+        self.addSubview(rs2)
+        
+        let rs3 = RouteStop(origin: CGPoint.init(x: mapPadding, y: rs2.frame.maxY), stopLabel: "Westwood SB & Lindbrook NS", timeLabel: "5:54 AM")
+        self.addSubview(rs3)
+        
+        // actual loop
+//        for route in routeArray {
+//            let rs = RouteStop(origin: CGPoint, stopLabel: route.stop, timeLabel: route.time)
+//            self.addSubview(rs)
+//        }
     }
     
     @objc func clickStar() {
