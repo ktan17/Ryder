@@ -18,11 +18,14 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     
     lazy var beaconManager = GMBLBeaconManager()
     lazy var refresh: UIRefreshControl! = createRefreshControl()
+    lazy var mutex: DispatchSemaphore = DispatchSemaphore(value: 1)
     
     var vehiclesInRange = [Vehicle]()
     
     var timeouts = [String : Int]()
     var timer: Timer!
+    
+    var isAnimating = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,9 +179,11 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     }
     
     private func reloadTickets() {
+        mutex.wait()
         var set = IndexSet()
         set.insert(0)
         tableView.reloadSections(set, with: .automatic)
+        mutex.signal()
     }
     
     private func createRefreshControl() -> UIRefreshControl {
@@ -248,11 +253,11 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "TicketViewCell") {
-            return cell
-        }
-        
+//
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: "TicketViewCell") {
+//            return cell
+//        }
+//
         let objects = Bundle.main.loadNibNamed("TicketViewCell", owner: self, options: nil)
         for object in objects ?? [] {
             if let cell = object as? TicketViewCell {
@@ -271,9 +276,33 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let ticketDetailView = TicketDetailView(vehicle: vehiclesInRange[indexPath.row], parentFrame: (self.navigationController?.view)!)
-        ticketDetailView.delegate = self
-        self.navigationController?.view.addSubview(ticketDetailView)
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? TicketViewCell {
+            var rect = cell.backgroundImageView.frame
+            rect.origin.x += 3
+            rect.size.width -= 7.5
+            
+            let cellFrame = navigationController!.view.convert(rect, from: cell)
+            print(cellFrame)
+            
+            let whiteView = UIView(frame: UIScreen.main.bounds)
+            whiteView.backgroundColor = .white
+            whiteView.alpha = 0
+            whiteView.tag = 69
+            self.navigationController?.view.addSubview(whiteView)
+
+            let ticketDetailView = TicketDetailView(vehicle: vehiclesInRange[indexPath.row], parentFrame: (self.navigationController?.view)!, initialFrame: cellFrame)
+            ticketDetailView.delegate = self
+            self.navigationController?.view.addSubview(ticketDetailView)
+            ticketDetailView.expand()
+            
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                whiteView.alpha = 0.75
+            }, completion: nil)
+            
+            self.tableView.isUserInteractionEnabled = false
+        }
+        
     }
     
     // MARK: GMBLBeaconManagerDelegate methods
@@ -320,8 +349,69 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if let detailView = scrollView as? TicketDetailView {
-            if detailView.contentOffset.y <= -150 {
-                detailView.removeFromSuperview()
+            if detailView.frame.origin.y >= 32 && !isAnimating {
+                isAnimating = true
+                detailView.delegate = nil
+                UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                    detailView.frame.origin.y = 32
+                }, completion: { [unowned self] (success) in
+                    self.isAnimating = false
+                    detailView.delegate = self
+                })
+            }
+        }
+    }
+    
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if let detailView = scrollView as? TicketDetailView {
+            if detailView.frame.origin.y >= 32 && !isAnimating {
+                isAnimating = true
+                detailView.delegate = nil
+                UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                    detailView.frame.origin.y = 32
+                }, completion: { [unowned self] (success) in
+                    self.isAnimating = false
+                    detailView.delegate = self
+                })
+            }
+        }
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if let detailView = scrollView as? TicketDetailView {
+            let initial: CGFloat = 32
+            let initialHeight: CGFloat = UIScreen.main.bounds.height + 20
+            print(detailView.contentOffset.y)
+            print(scrollView.contentSize.height - 64)
+            
+            if detailView.contentOffset.y <= 0 {
+                detailView.frame.origin.y += abs(detailView.contentOffset.y)
+                detailView.contentOffset.y = 0
+                
+                if detailView.frame.origin.y >= initial + 140 {
+                    detailView.delegate = nil
+                    if let whiteView = navigationController?.view.viewWithTag(69), !isAnimating {
+                        isAnimating = true
+                        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                            detailView.frame = CGRect(x: detailView.frame.minX, y: UIScreen.main.bounds.height, width: detailView.frame.width, height: detailView.frame.height)
+                            whiteView.alpha = 0
+                        }, completion: { (success) in
+                            detailView.removeFromSuperview()
+                            whiteView.removeFromSuperview()
+                            self.isAnimating = false
+                            self.tableView.isUserInteractionEnabled = true
+                        })
+                    }
+                }
+            }
+                
+            else if detailView.contentOffset.y > 0 && detailView.contentOffset.y <= 80 {
+                detailView.frame.origin.y = initial - detailView.contentOffset.y/2
+            }
+            
+            else if detailView.contentOffset.y >= 473 - 80 && detailView.contentOffset.y <= 497.5 {
+                detailView.frame.size.height = initialHeight - (detailView.contentOffset.y - (473-80))/2
             }
         }
     }
