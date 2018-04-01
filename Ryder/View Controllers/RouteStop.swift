@@ -10,7 +10,6 @@ import UIKit
 
 class RouteStop: UIView {
     
-    private let viewWidth: CGFloat = 320
     private let padding: CGFloat = 18
     private let dotDiameter: CGFloat = 22
     private let lineWidth: CGFloat = 4
@@ -20,7 +19,7 @@ class RouteStop: UIView {
     var dotView: UIView!
     var lineView: UIView!
     
-    init(origin: CGPoint, stopLabel: String, timeLabel: String) {
+    init(origin: CGPoint, stopLabel: String, timeLabel: String, viewWidth: CGFloat) {
         
         // initiate frame
         self.stopLabel = UILabel(frame: CGRect(x: 0, y: 0, width: viewWidth * 2/3, height: 30))
@@ -35,17 +34,19 @@ class RouteStop: UIView {
         self.stopLabel.sizeToFit()
         
         // set frame
-        super.init(frame: CGRect(x: origin.x, y: origin.y, width: self.viewWidth, height: self.stopLabel.frame.height + padding*2))
+        super.init(frame: CGRect(x: origin.x, y: origin.y, width: viewWidth, height: self.stopLabel.frame.height + padding*2))
         
         self.stopLabel.center.y = self.frame.height / 2
         
         self.addSubview(self.stopLabel)
         
         // dot + line construction
-        self.dotView = UIView(frame: CGRect(x: viewWidth*2/3, y: origin.y, width: dotDiameter, height: dotDiameter))
+        self.dotView = UIView(frame: CGRect(x: viewWidth*2/3, y: self.stopLabel.center.y - dotDiameter/2, width: dotDiameter, height: dotDiameter))
         self.dotView.clipsToBounds = true
         self.dotView.layer.cornerRadius = dotDiameter/2
-        self.lineView = UIView(frame: CGRect(x: viewWidth*2/3, y: origin.y, width: lineWidth, height: self.frame.height))
+        self.dotView.backgroundColor = .white
+        self.lineView = UIView(frame: CGRect(x: viewWidth*2/3 + dotDiameter/2 - lineWidth/2, y: 0, width: lineWidth, height: self.frame.height))
+        self.lineView.backgroundColor = Charcoal
         
         // time label
         self.timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 70, height: 23))
@@ -56,8 +57,8 @@ class RouteStop: UIView {
         self.timeLabel.frame = CGRect(x: viewWidth - self.timeLabel.frame.width, y: self.frame.height / 2 - self.timeLabel.frame.height / 2, width: self.timeLabel.frame.width, height: self.timeLabel.frame.height)
         self.timeLabel.center.y = self.frame.height / 2
         
-        self.addSubview(dotView)
         self.addSubview(lineView)
+        self.addSubview(dotView)
         self.addSubview(self.timeLabel)
 
     }
