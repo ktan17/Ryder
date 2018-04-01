@@ -154,6 +154,7 @@
             <connections>
                 <outlet property="backgroundImageView" destination="vnI-xN-h31" id="JSO-rT-EkU"/>
                 <outlet property="bottomLine" destination="0Ny-Ch-2fA" id="z2R-Bn-Hcb"/>
+                <outlet property="directionLabel" destination="PiD-4b-6AC" id="xEL-cm-PGl"/>
                 <outlet property="logoImageView" destination="yZm-Au-n6c" id="tHa-uJ-5ic"/>
                 <outlet property="nextLabel" destination="BXT-B8-cnW" id="6RV-ba-iTb"/>
                 <outlet property="nextLocationLabel" destination="fGT-9n-lpd" id="8w0-y7-yFe"/>
