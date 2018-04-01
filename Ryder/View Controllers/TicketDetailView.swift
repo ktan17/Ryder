@@ -16,7 +16,6 @@ class TicketDetailView: UIScrollView {
     var transitTypeLabel: UILabel!
     var numberLabel: UILabel!
     var transitNumberLabel: UILabel!
-    var starImageView: UIImageView!
     var starButton: UIButton!
     var nextLabel: UILabel!
     var nextLocationLabel: UILabel!
@@ -131,14 +130,14 @@ class TicketDetailView: UIScrollView {
         
         // star button
         starButton = UIButton(frame: CGRect(x: mapView.frame.maxX - 28, y: 0, width: 28, height: 28))
-        starButton.setImage(UIImage(named: "hollow_star.png"), for: .normal)
+        if (vehicle.isStarred) {
+            starButton.setImage(UIImage(named: "star.png"), for: .normal)
+        } else {
+            starButton.setImage(UIImage(named: "hollow_star.png"), for: .normal)
+        }
         starButton.center.y = directionLabel.center.y
         self.addSubview(starButton)
         starButton.addTarget(self, action: #selector(clickStar), for: .touchUpInside)
-        
-        if (vehicle.isStarred) {
-            self.addSubview(starImageView)
-        }
         
 //        allStops = [
 //            Vehicle.RouteStopData
@@ -183,6 +182,7 @@ class TicketDetailView: UIScrollView {
             m_vehicle.isStarred = true
             starButton.setImage(UIImage(named: "star.png"), for: .normal)
         }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -53,6 +53,10 @@ class TicketViewCell: UITableViewCell {
         transitTypeLabel.text = vehicle.type
         directionLabel.text = vehicle.direction
         
+        if (!vehicle.isStarred) {
+            starImageView.isHidden = true
+        }
+        
         selectionStyle = .none
         backgroundColor = .clear
     }

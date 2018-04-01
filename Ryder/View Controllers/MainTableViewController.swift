@@ -21,6 +21,8 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     
     var vehiclesInRange = [Vehicle]()
     
+    var currentDetailId: String? = nil
+    
     var timeouts = [String : Int]()
     var timer: Timer!
     
@@ -273,6 +275,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ticketDetailView = TicketDetailView(vehicle: vehiclesInRange[indexPath.row], parentFrame: (self.navigationController?.view)!)
         ticketDetailView.delegate = self
+        currentDetailId = vehiclesInRange[indexPath.row].id
         self.navigationController?.view.addSubview(ticketDetailView)
     }
     
@@ -321,7 +324,16 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if let detailView = scrollView as? TicketDetailView {
             if detailView.contentOffset.y <= -150 {
+                if let currentDetailId = currentDetailId {
+                    if let idx = vehiclesInRange.index(where: { (vehicle) -> Bool in
+                        return vehicle.id == currentDetailId
+                    }) {
+                        vehiclesInRange[idx].isStarred = detailView.m_vehicle.isStarred
+                        tableView.reloadRows(at: [IndexPath(row: idx, section: 0)], with: .none)
+                    }
+                }
                 detailView.removeFromSuperview()
+                
             }
         }
     }
