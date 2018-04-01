@@ -8,6 +8,7 @@
 
 import UIKit
 import Gimbal
+import FirebaseFirestore
 
 class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate {
 
@@ -35,6 +36,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         self.beaconManager.delegate = self
         
         tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -102,7 +104,9 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                 if indexPath.row == 1 {
                     cell.backgroundImageView.image = UIImage(named: "blueticket")
                 }
+                
                 cell.selectionStyle = .none
+                cell.backgroundColor = .clear
                 return cell
             }
         }
@@ -123,26 +127,50 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     
     func beaconManager(_ manager: GMBLBeaconManager!, didReceive sighting: GMBLBeaconSighting!) {
         
+        func getRoute(from routeRef: DocumentReference) {
+            routeRef.getDocument { (snapshot, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                if let snapshot = snapshot {
+                    print(snapshot.data()!["short_name"] as! String)
+                }
+            }
+        }
+        
+        //func getAgenc
+        
         guard let identifier = sighting.beacon.identifier else {
             return
         }
         
-        if identifier == "MKTY-MM2M4" {
-            print("woohoo")
-        }
-        else if identifier == "NNS6-34KS6" {
-            if !vehiclesInRange.contains(where: { $0.id == identifier }) {
-                let vehicle = Vehicle(id: identifier)
-                vehiclesInRange.append(vehicle)
-                self.reloadTickets()
+        Firestore.firestore().collection("vehicles").getDocuments { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
             }
             
-            timeouts[identifier] = 10
-            beginTiming()
+            if let snapshot = snapshot {
+                for document in snapshot.documents {
+                    if let id = document.data()["beaconID"] as? String, id == identifier {
+                        if let routeRef = document.data()["route"] as? DocumentReference {
+                            getRoute(from: routeRef)
+                        }
+                    }
+                }
+            }
         }
-        else {
-            
+        
+        if !vehiclesInRange.contains(where: { $0.id == identifier }) {
+            let vehicle = Vehicle(id: identifier)
+            vehiclesInRange.append(vehicle)
+            self.reloadTickets()
         }
+        
+        timeouts[identifier] = 10
+        beginTiming()
         
     }
 

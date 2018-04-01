@@ -7,7 +7,8 @@ target 'Ryder' do
 
   # Pods for Ryder
   pod 'Gimbal'
-  pod 'Firebase/Database'
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
 
   target 'RyderTests' do
     inherit! :search_paths
