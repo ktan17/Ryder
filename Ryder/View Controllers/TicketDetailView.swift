@@ -23,18 +23,29 @@ class TicketDetailView: UIView {
     var topLine: UIView!
     var bottomLine: UIView!
     
-    init(VehicleID: String) {
-        logoImageView.image = UIImage(named: "metro_logo.png")
-        transitTypeLabel.text = "Bus"
-        transitNumberLabel.text = "31"
+    init(vehicle: Vehicle) {
+        if (vehicle.type == "Bus") {
+            logoImageView.image = UIImage(named: "metro_logo.png")
+            transitTypeLabel.text = "Bus"
+            nextLabel.text = NextDest.nextBus
+            topLine = UIView(frame: CGRect(x: 0, y: 42, width: 313, height: 3))
+            bottomLine = UIView(frame: CGRect(x: 13, y: 48, width: 313, height: 2))
+        } else if (vehicle.type == "Train") {
+            logoImageView.image = UIImage(named: "amtrak_logo.png")
+            transitTypeLabel.text = "Train"
+            nextLabel.text = NextDest.nextTrain
+        }
+        transitNumberLabel.text = vehicle.id
         starImageView.image = UIImage(named: "star.png")
-        nextLabel.text = "NEXT STOP"
-        nextLocationLabel.text = "42 St./ Sepulveda Blvd."
+        nextLocationLabel.text = vehicle.nextStop
+        
+        // TODO
         directionLabel.text  = "EASTBOUND"
         mapView.image = UIImage(named: "maptest.png")
         
-        topLine = UIView(frame: CGRect(x: 0, y: 42, width: 313, height: 3))
-        bottomLine = UIView(frame: CGRect(x: 13, y: 48, width: 313, height: 2))
+        if (vehicle.isStarred) {
+            self.addSubview(starImageView)
+        }
         
     }
     
