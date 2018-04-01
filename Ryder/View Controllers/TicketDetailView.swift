@@ -155,6 +155,8 @@ class TicketDetailView: UIScrollView {
             origin.y += rs.frame.height
         }
         
+        self.contentSize = CGSize(width: self.frame.width, height: origin.y + 20)
+        
         /*
         let rs1 = RouteStop(origin: CGPoint.init(x: mapPadding, y: mapView.frame.maxY + 22), stopLabel: "Westwood SB & Lindbrook NS", timeLabel: "1:36 PM", viewWidth: width)
         self.addSubview(rs1)
@@ -164,8 +166,6 @@ class TicketDetailView: UIScrollView {
         
         let rs3 = RouteStop(origin: CGPoint.init(x: mapPadding, y: rs2.frame.maxY), stopLabel: "Westwood SB & Lindbrook NS", timeLabel: "5:54 AM", viewWidth: width)
         self.addSubview(rs3)
-        
-        self.contentSize = CGSize(width: self.frame.width, height: rs3.frame.maxY + 20)
         
         //allStops[0].
         // actual loop

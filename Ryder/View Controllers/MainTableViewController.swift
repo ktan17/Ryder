@@ -10,7 +10,7 @@ import UIKit
 import Gimbal
 import FirebaseFirestore
 
-let noBluetooth = true
+let noBluetooth = false
 
 class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate {
 
@@ -75,7 +75,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     
     private func createDummyVehicle() {
         let identifier = "MKTY-MM2M4"
-        
+     
         if !self.timeouts.keys.contains(identifier) {
             
             DispatchQueue.global(qos: .background).async {
@@ -93,14 +93,79 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                                 let routeRef = document.data()["route"] as? DocumentReference,
                                 let routeNumber = document.data()["number"] as? String,
                                 let rawDirection = document.data()["direction"] as? String,
-                                let direction = getStringFromDirection(rawDirection) {
-                                self.getRoute(from: routeRef, id: id, nextStop: nextStop, direction: direction, routeNumber: routeNumber)
+                                let direction = getStringFromDirection(rawDirection),
+                                let times = document.data()["timeTo"] as? [Int] {
+                                self.getRoute(from: routeRef, id: id, nextStop: nextStop, direction: direction, routeNumber: routeNumber, times: times)
                             }
                         }
                     }
                 }
             }
             
+        }
+    }
+    
+    private func getRoute(from routeRef: DocumentReference, id: String, nextStop: String, direction: String, routeNumber: String, times: [Int]) {
+        routeRef.getDocument { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let snapshot = snapshot,
+                let secondRouteNumber = snapshot.data()?["short_name"] as? String,
+                let stops = (snapshot.data()?["stops"] as? [String : Any])?[String(direction.first!)] as? [String],
+                let agencyRef = snapshot.data()?["agency"] as? DocumentReference {
+                var route: String
+                if Int(secondRouteNumber) != nil {
+                    route = secondRouteNumber
+                } else {
+                    route = routeNumber
+                }
+                
+                var stopData = [Vehicle.RouteStopData]()
+                if let idxOfNext = stops.index(of: nextStop) {
+                    for i in idxOfNext ... stops.count-1 {
+                        guard i-idxOfNext < times.count else {
+                            break
+                        }
+                        let stop = stops[i]
+                        let element = Vehicle.RouteStopData(
+                            name: stop,
+                            time: times[i-idxOfNext]
+                        )
+                        stopData.append(element)
+                    }
+                }
+                
+                self.getAgency(from: agencyRef, id: id, nextStop: nextStop, direction: direction, routeNumber: route, routeStopData: stopData)
+            }
+        }
+    }
+    
+    private func getAgency(from agencyRef: DocumentReference, id: String, nextStop: String, direction: String, routeNumber: String, routeStopData: [Vehicle.RouteStopData]) {
+        agencyRef.getDocument { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let snapshot = snapshot, let type = snapshot.data()?["type"] as? String {
+                let vehicle = Vehicle(id: id, nextStop: nextStop, type: type, direction: direction, routeNumber: routeNumber, routeStops: routeStopData)
+                self.vehiclesInRange.append(vehicle)
+                DispatchQueue.main.async {
+                    self.reloadTickets()
+                    if let control = self.refresh {
+                        control.endRefreshing()
+                        let when = DispatchTime.now() + 0.5
+                        DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                            self.tableView.refreshControl = nil
+                            self.refresh = nil
+                            self.tableView.isUserInteractionEnabled = true
+                        })
+                    }
+                }
+            }
         }
     }
     
@@ -214,72 +279,6 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     
     func beaconManager(_ manager: GMBLBeaconManager!, didReceive sighting: GMBLBeaconSighting!) {
         
-        func getRoute(from routeRef: DocumentReference, id: String, nextStop: String, direction: String, routeNumber: String, times: [Int]) {
-            routeRef.getDocument { (snapshot, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                
-                if let snapshot = snapshot,
-                    let secondRouteNumber = snapshot.data()?["short_name"] as? String,
-                    let stops = (snapshot.data()?["stops"] as? [String : Any])?[String(direction.first!)] as? [String],
-                    let agencyRef = snapshot.data()?["agency"] as? DocumentReference {
-                    var route: String
-                    if Int(secondRouteNumber) != nil {
-                        route = secondRouteNumber
-                    } else {
-                        route = routeNumber
-                    }
-                    
-                    var stopData = [Vehicle.RouteStopData]()
-                    if let idxOfNext = stops.index(of: nextStop) {
-                        for i in idxOfNext ... stops.count-1 {
-                            guard i-idxOfNext < times.count else {
-                                break
-                            }
-                            let stop = stops[i]
-                            let element = Vehicle.RouteStopData(
-                                name: stop,
-                                time: times[i-idxOfNext]
-                            )
-                            stopData.append(element)
-                        }
-                    }
-                    
-                    getAgency(from: agencyRef, id: id, nextStop: nextStop, direction: direction, routeNumber: route, routeStopData: stopData)
-                }
-            }
-        }
-        
-        func getAgency(from agencyRef: DocumentReference, id: String, nextStop: String, direction: String, routeNumber: String, routeStopData: [Vehicle.RouteStopData]) {
-            agencyRef.getDocument { (snapshot, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                
-                if let snapshot = snapshot, let type = snapshot.data()?["type"] as? String {
-                    let vehicle = Vehicle(id: id, nextStop: nextStop, type: type, direction: direction, routeNumber: routeNumber, routeStops: routeStopData)
-                    self.vehiclesInRange.append(vehicle)
-                    DispatchQueue.main.async {
-                        self.reloadTickets()
-                        if let control = self.refresh {
-                            control.endRefreshing()
-                            let when = DispatchTime.now() + 0.5
-                            DispatchQueue.main.asyncAfter(deadline: when, execute: {
-                                self.tableView.refreshControl = nil
-                                self.refresh = nil
-                                self.tableView.isUserInteractionEnabled = true
-                            })
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func beaconManager(_ manager: GMBLBeaconManager!, didReceive sighting: GMBLBeaconSighting!) {
         guard let identifier = sighting.beacon.identifier else {
             return
         }
@@ -303,7 +302,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                                 let rawDirection = document.data()["direction"] as? String,
                                 let direction = getStringFromDirection(rawDirection),
                                 let times = document.data()["timeTo"] as? [Int] {
-                                getRoute(from: routeRef, id: id, nextStop: nextStop, direction: direction, routeNumber: routeNumber, times: times)
+                                self.getRoute(from: routeRef, id: id, nextStop: nextStop, direction: direction, routeNumber: routeNumber, times: times)
                             }
                         }
                     }
@@ -311,10 +310,9 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
             }
             
         }
-       
+        
         timeouts[identifier] = 10
         beginTiming()
-        
     }
 
 }
