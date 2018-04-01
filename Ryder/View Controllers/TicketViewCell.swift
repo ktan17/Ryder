@@ -20,11 +20,9 @@ class TicketViewCell: UITableViewCell {
     
     @IBOutlet var topLine: UIView!
     @IBOutlet var bottomLine: UIView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
 
-        let attributedString = NSMutableAttributedString(string: "42 St. / Sepulveda Blvd.")
+    private func setNextStopText(_ text: String) {
+        let attributedString = NSMutableAttributedString(string: text)
         
         // *** Create instance of `NSMutableParagraphStyle`
         let paragraphStyle = NSMutableParagraphStyle()
@@ -39,6 +37,37 @@ class TicketViewCell: UITableViewCell {
         
         nextLocationLabel.text = nil
         nextLocationLabel.attributedText = attributedString;
+    }
+    
+    func configure(using vehicle: Vehicle) {
+        if vehicle.type == "Bus" {
+            backgroundImageView.image = UIImage(named: "ticket_bus_metro")
+            if let constraint = logoImageView.constraints.first(where: { $0.identifier == "widthConstraint" }) {
+                constraint.constant = 34
+            }
+            logoImageView.image = UIImage(named: "metro_logo")
+            transitTypeLabel.textColor = Charcoal
+            
+            topLine.isHidden = false
+            bottomLine.isHidden = false
+        }
+            
+        else if vehicle.type == "Train" {
+            backgroundImageView.image = UIImage(named: "blueticket")
+            if let constraint = logoImageView.constraints.first(where: { $0.identifier == "widthConstraint" }) {
+                constraint.constant = 50
+            }
+            logoImageView.image = UIImage(named: "amtrak_logo")
+            transitTypeLabel.textColor = .white
+            
+            topLine.isHidden = true
+            bottomLine.isHidden = true
+        }
+        setNextStopText(vehicle.nextStop)
+        transitTypeLabel.text = vehicle.type
+        
+        selectionStyle = .none
+        backgroundColor = .clear
     }
     
 }
