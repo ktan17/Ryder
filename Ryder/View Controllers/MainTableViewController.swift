@@ -12,6 +12,8 @@ import FirebaseFirestore
 
 class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate {
 
+    private let cellPadding: CGFloat = 9
+    
     lazy var beaconManager = GMBLBeaconManager()
     var vehiclesInRange = [Vehicle]()
     var timeouts = [String : Int]()
@@ -37,6 +39,8 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0)
+        
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: cellPadding))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,6 +77,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                 timer.invalidate()
                 timer = nil
                 
+                timeouts.removeValue(forKey: key)
                 if let index = vehiclesInRange.index(where: { $0.id == key}) {
                     vehiclesInRange.remove(at: index)
                     
@@ -103,21 +108,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         for object in objects ?? [] {
             if let cell = object as? TicketViewCell {
                 let vehicle = vehiclesInRange[indexPath.row]
-                
-                if vehicle.type == "Bus" {
-                    cell.backgroundImageView.image = UIImage(named: "ticket_bus_metro")
-                    cell.transitTypeLabel.text = "Bus"
-                }
-                
-                else if vehicle.type == "Train" {
-                    cell.backgroundImageView.image = UIImage(named: "blueticket")
-                    cell.transitTypeLabel.text = "Train"
-                }
-                
-                cell.nextLocationLabel.text = vehicle.nextStop
-                
-                cell.selectionStyle = .none
-                cell.backgroundColor = .clear
+                cell.configure(using: vehicle)
                 return cell
             }
         }
@@ -127,7 +118,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 212
+        return 194 + 2*cellPadding
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

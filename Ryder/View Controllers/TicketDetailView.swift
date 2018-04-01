@@ -23,7 +23,7 @@ class TicketDetailView: UIView {
     var topLine: UIView!
     var bottomLine: UIView!
     
-    init(vehicle: Vehicle) {
+    /*init(vehicle: Vehicle) {
         if (vehicle.type == "Bus") {
             logoImageView.image = UIImage(named: "metro_logo.png")
             transitTypeLabel.text = "Bus"
@@ -47,7 +47,7 @@ class TicketDetailView: UIView {
             self.addSubview(starImageView)
         }
         
-    }
+    }*/
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
