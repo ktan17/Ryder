@@ -55,6 +55,8 @@ class TicketViewCell: UITableViewCell {
         
         if (!vehicle.isStarred) {
             starImageView.isHidden = true
+        } else {
+            starImageView.isHidden = false
         }
         
         selectionStyle = .none

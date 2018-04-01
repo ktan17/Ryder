@@ -23,6 +23,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     var vehiclesInRange = [Vehicle]()
     
     var currentDetailId: String? = nil
+    var oldStar = false
     
     var timeouts = [String : Int]()
     var timer: Timer!
@@ -71,7 +72,9 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         
         if !noBluetooth {
             self.beaconManager.startListening()
-            self.beginRefreshingControl()
+            if vehiclesInRange.isEmpty {
+                self.beginRefreshingControl()
+            }
         }
     }
 
@@ -307,6 +310,8 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
             }, completion: nil)
             
             self.tableView.isUserInteractionEnabled = false
+            self.currentDetailId = vehiclesInRange[indexPath.row].id
+            self.oldStar = vehiclesInRange[indexPath.row].isStarred
         }
         
     }
@@ -317,6 +322,17 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         
         guard let identifier = sighting.beacon.identifier else {
             return
+        }
+        
+        // HARD CODE O3O
+        if subscriptions.contains(where: { (subscription) -> Bool in
+            subscription.shortName == "602" && subscription.direction == "E"
+        }) && identifier == "MKTY-MM2M4" {
+            print("YEETED")
+        }
+        
+        else if /*subscriptions.contains("") &&*/ identifier == "NNS6-34KS6" {
+            print("YOTE")
         }
         
         if !self.timeouts.keys.contains(identifier) {
@@ -407,6 +423,10 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                             whiteView.removeFromSuperview()
                             self.isAnimating = false
                             self.tableView.isUserInteractionEnabled = true
+                            
+                            if detailView.m_vehicle.isStarred != self.oldStar {
+                                self.reloadTickets()
+                            }
                         })
                     }
                 }
