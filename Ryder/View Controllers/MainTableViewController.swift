@@ -75,6 +75,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                 
                 if let index = vehiclesInRange.index(where: { $0.id == key}) {
                     vehiclesInRange.remove(at: index)
+                    
                     self.reloadTickets()
                 }
             }
@@ -171,14 +172,8 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         guard let identifier = sighting.beacon.identifier else {
             return
         }
-        
-        if vehiclesInRange.contains(where: { $0.id == identifier }) {
-            timeouts[identifier] = 10
-            beginTiming()
-        }
-        
-        else {
-            
+
+        if !timeouts.keys.contains(identifier) {
             Firestore.firestore().collection("vehicles").getDocuments { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)
@@ -198,8 +193,10 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                     }
                 }
             }
-        
         }
+        
+        timeouts[identifier] = 10
+        beginTiming()
         
     }
 
