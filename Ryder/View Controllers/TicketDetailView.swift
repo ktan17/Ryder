@@ -122,7 +122,7 @@ class TicketDetailView: UIScrollView {
         nextLocationLabel.sizeToFit()
         self.addSubview(nextLocationLabel)
         
-        starButton = UIButton(frame: CGRect(x: mapWidth - 28.0, y: 0, width: 28, height: 28))
+        starButton = UIButton(frame: CGRect(x: mapWidth - 28.0, y: 0, width: 34, height: 34))
         
         // direction label
         directionLabel.text = vehicle.direction
@@ -153,21 +153,7 @@ class TicketDetailView: UIScrollView {
         starButton.center.y = directionLabel.center.y
         self.addSubview(starButton)
         starButton.addTarget(self, action: #selector(clickStar), for: .touchUpInside)
-        
-<<<<<<< HEAD
-//        allStops = [
-//            Vehicle.RouteStopData
-//        ]
-//        
-        // route stops
-        // FOR TEST
-        
-=======
-        if (vehicle.isStarred) {
-            self.addSubview(starImageView)
-        }
 
->>>>>>> ktan
         let width = self.frame.width - 2*mapPadding
         var origin: CGPoint = CGPoint(x: mapPadding, y: mapView.frame.maxY + 22)
         for stop in vehicle.routeStops {
@@ -185,9 +171,21 @@ class TicketDetailView: UIScrollView {
     @objc func clickStar() {
         if (m_vehicle.isStarred) {
             m_vehicle.isStarred = false
+            subscriptions.remove(Subscription(
+                shortName: m_vehicle.routeNumber,
+                direction: String(m_vehicle.direction.first!),
+                agency: "",
+                isStarred: true
+            ))
             starButton.setImage(UIImage(named: "hollow_star.png"), for: .normal)
         } else {
             m_vehicle.isStarred = true
+            subscriptions.insert(Subscription(
+                shortName: m_vehicle.routeNumber,
+                direction: String(m_vehicle.direction.first!),
+                agency: "",
+                isStarred: true
+            ))
             starButton.setImage(UIImage(named: "star.png"), for: .normal)
         }
         

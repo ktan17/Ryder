@@ -93,7 +93,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfq-Nu-O6l" userLabel="shortName">
-                                            <rect key="frame" x="16" y="11" width="75" height="40"/>
+                                            <rect key="frame" x="16" y="11" width="299" height="40"/>
                                             <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="28"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -111,9 +111,13 @@
                                                 <constraint firstAttribute="width" constant="36" id="aXB-DN-LUN"/>
                                             </constraints>
                                             <state key="normal" image="hollow_star_black"/>
+                                            <connections>
+                                                <action selector="tappedStarButton:" destination="uHW-ku-iDA" eventType="touchUpInside" id="LuX-Wg-g08"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="BAo-se-Vog" firstAttribute="leading" secondItem="Dfq-Nu-O6l" secondAttribute="trailing" constant="8" id="9pe-RI-R1c"/>
                                         <constraint firstItem="RT5-OB-R7w" firstAttribute="top" secondItem="Dfq-Nu-O6l" secondAttribute="bottom" id="QcB-B6-Q0K"/>
                                         <constraint firstItem="Dfq-Nu-O6l" firstAttribute="top" secondItem="WHi-CS-2fp" secondAttribute="topMargin" id="UHA-6z-Yi2"/>
                                         <constraint firstItem="RT5-OB-R7w" firstAttribute="leading" secondItem="WHi-CS-2fp" secondAttribute="leadingMargin" id="Yd2-tl-nja"/>

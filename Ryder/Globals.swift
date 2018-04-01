@@ -70,6 +70,8 @@ struct Subscription: Hashable {
     
     var shortName: String
     var direction: String // single-char code
+    var agency: String
+    var isStarred: Bool = false
 }
 
-let subscriptions = Set<Subscription>()
+var subscriptions = Set<Subscription>()

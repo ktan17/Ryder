@@ -363,8 +363,11 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -799,6 +802,7 @@
 			baseConfigurationReference = 820A91D1DDB4CC6C3C51459A /* Pods-Ryder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Ryder/Ryder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 35RJCBGV7U;
 				INFOPLIST_FILE = Ryder/Info.plist;
@@ -816,6 +820,7 @@
 			baseConfigurationReference = 45EC3F95611AE72A884EF50A /* Pods-Ryder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Ryder/Ryder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 35RJCBGV7U;
 				INFOPLIST_FILE = Ryder/Info.plist;
