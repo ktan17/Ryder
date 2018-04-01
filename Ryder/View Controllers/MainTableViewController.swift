@@ -59,6 +59,10 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         }
     }
     
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         

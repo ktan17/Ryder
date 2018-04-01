@@ -21,6 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Gimbal.start()
         
         FirebaseApp.configure()
+        
+        let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+        if statusBar.responds(to:#selector(setter: UIView.backgroundColor)) {
+            statusBar.backgroundColor = UIColor(red: 207/255, green: 213/255, blue: 215/255, alpha: 1.0)
+        }
         return true
     }
 

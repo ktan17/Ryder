@@ -6,8 +6,17 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Light.ttf">
+            <string>Poppins-Light</string>
+        </array>
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main Table View Controller-->
         <scene sceneID="gUN-kd-b0N">
@@ -26,12 +35,109 @@
                         <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="vgC-7H-zgx">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="uHW-ku-iDA" kind="presentation" id="0oT-UU-t6d"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7U-Qf-dqL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="557.60000000000002" y="175.86206896551727"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="2C4-If-BSp">
+            <objects>
+                <tableViewController id="uHW-ku-iDA" customClass="SearchViewController" customModule="Ryder" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="a2j-oX-6uc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="6tJ-8L-S0g" userLabel="topbar">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ieI-d1-WmC">
+                                    <rect key="frame" x="8" y="10" width="72" height="40"/>
+                                    <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="20"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="WbW-ko-PZA" kind="unwind" unwindAction="unwindToMainWithSegue:" id="tSO-Uu-VPS"/>
+                                    </connections>
+                                </button>
+                                <searchBar contentMode="redraw" placeholder="Search transit..." translatesAutoresizingMaskIntoConstraints="NO" id="2h9-mr-yzJ">
+                                    <rect key="frame" x="88" y="0.0" width="287" height="60"/>
+                                    <color key="barTintColor" red="0.76862745098039209" green="0.79607843137254897" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" smartDashesType="no" smartQuotesType="no"/>
+                                </searchBar>
+                            </subviews>
+                            <color key="backgroundColor" red="0.76862745098039209" green="0.79607843137254897" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="2h9-mr-yzJ" firstAttribute="leading" secondItem="ieI-d1-WmC" secondAttribute="trailing" constant="8" id="6sf-33-Orp"/>
+                                <constraint firstItem="ieI-d1-WmC" firstAttribute="leading" secondItem="6tJ-8L-S0g" secondAttribute="leading" constant="8" id="9h4-KG-lLy" userLabel="Cancel.leading = leading + 8"/>
+                                <constraint firstItem="2h9-mr-yzJ" firstAttribute="top" secondItem="6tJ-8L-S0g" secondAttribute="top" id="JuL-J5-7Ei"/>
+                                <constraint firstAttribute="trailing" secondItem="2h9-mr-yzJ" secondAttribute="trailing" id="PNH-QI-bAf"/>
+                                <constraint firstAttribute="bottom" secondItem="2h9-mr-yzJ" secondAttribute="bottom" id="Ujs-kd-bJ6"/>
+                                <constraint firstItem="ieI-d1-WmC" firstAttribute="centerY" secondItem="2h9-mr-yzJ" secondAttribute="centerY" id="ciZ-4z-nVD"/>
+                                <constraint firstItem="2h9-mr-yzJ" firstAttribute="centerY" secondItem="6tJ-8L-S0g" secondAttribute="centerY" id="sDe-ma-Uhm"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="92" id="K3K-dI-JFw">
+                                <rect key="frame" x="0.0" y="88" width="375" height="92"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K3K-dI-JFw" id="WHi-CS-2fp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="91.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfq-Nu-O6l">
+                                            <rect key="frame" x="16" y="11" width="75" height="40"/>
+                                            <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="28"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EASTBOUND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RT5-OB-R7w">
+                                            <rect key="frame" x="16" y="51" width="135.5" height="34"/>
+                                            <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAo-se-Vog">
+                                            <rect key="frame" x="323" y="28" width="36" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="Bkv-Gw-AG3"/>
+                                                <constraint firstAttribute="width" constant="36" id="aXB-DN-LUN"/>
+                                            </constraints>
+                                            <state key="normal" image="hollow_star_black"/>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="RT5-OB-R7w" firstAttribute="top" secondItem="Dfq-Nu-O6l" secondAttribute="bottom" id="QcB-B6-Q0K"/>
+                                        <constraint firstItem="Dfq-Nu-O6l" firstAttribute="top" secondItem="WHi-CS-2fp" secondAttribute="topMargin" id="UHA-6z-Yi2"/>
+                                        <constraint firstItem="RT5-OB-R7w" firstAttribute="leading" secondItem="WHi-CS-2fp" secondAttribute="leadingMargin" id="Yd2-tl-nja"/>
+                                        <constraint firstItem="Dfq-Nu-O6l" firstAttribute="leading" secondItem="WHi-CS-2fp" secondAttribute="leadingMargin" id="fyj-md-glr"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="BAo-se-Vog" secondAttribute="trailing" id="o5S-Tw-y10"/>
+                                        <constraint firstItem="BAo-se-Vog" firstAttribute="centerY" secondItem="WHi-CS-2fp" secondAttribute="centerY" id="rjh-DV-Nme"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uHW-ku-iDA" id="6YW-oX-a5f"/>
+                            <outlet property="delegate" destination="uHW-ku-iDA" id="jPS-Uc-wFG"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="searchBar" destination="2h9-mr-yzJ" id="Xbj-pj-cnO"/>
+                        <outlet property="topbar" destination="6tJ-8L-S0g" id="yk7-mm-UH7"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d1Y-Mn-8oK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="WbW-ko-PZA" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1448.8" y="175.86206896551727"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lvp-xy-RPA">
@@ -40,7 +146,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="3Jd-Ch-yNE">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.76942511479972864" green="0.7942452797932682" blue="0.80488249336192808" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.76862745098039209" green="0.79607843137254897" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="QeR-rl-kZ2" kind="relationship" relationship="rootViewController" id="CPg-dD-lh6"/>
@@ -51,4 +157,7 @@
             <point key="canvasLocation" x="-392" y="176"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="hollow_star_black" width="80" height="82"/>
+    </resources>
 </document>
