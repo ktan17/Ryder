@@ -10,13 +10,17 @@ import Foundation
 
 class Vehicle: NSObject {
     
-    var distance: Double!
-    var url: String!
+    struct RouteStopData {
+        var name: String
+        var time: Int
+    }
+    
     var id: String
     var nextStop: String
     var type: String
     var routeNumber: String
     var direction: String
+    var routeStops = [RouteStopData]()
     var isStarred = false
     
     init(id: String, nextStop: String, type: String, direction: String, routeNumber: String) {

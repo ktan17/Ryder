@@ -21,24 +21,6 @@ class TicketViewCell: UITableViewCell {
     
     @IBOutlet var topLine: UIView!
     @IBOutlet var bottomLine: UIView!
-
-    private func setNextStopText(_ text: String) {
-        let attributedString = NSMutableAttributedString(string: text)
-        
-        // *** Create instance of `NSMutableParagraphStyle`
-        let paragraphStyle = NSMutableParagraphStyle()
-        
-        // *** set LineSpacing property in points ***
-        paragraphStyle.lineHeightMultiple = 0.8 // Whatever line spacing you want in points
-        
-        // *** Apply attribute to string ***
-        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
-        
-        // *** Set Attributed String to your label ***
-        
-        nextLocationLabel.text = nil
-        nextLocationLabel.attributedText = attributedString;
-    }
     
     func configure(using vehicle: Vehicle) {
         if vehicle.type == "Bus" {
@@ -66,7 +48,8 @@ class TicketViewCell: UITableViewCell {
             topLine.isHidden = true
             bottomLine.isHidden = true
         }
-        setNextStopText(vehicle.nextStop)
+        setLineSpacing(nextLocationLabel, text: vehicle.nextStop, lineHeightMultiple: 0.8)
+        transitNumberLabel.text = vehicle.routeNumber
         transitTypeLabel.text = vehicle.type
         directionLabel.text = vehicle.direction
         
