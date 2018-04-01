@@ -167,7 +167,8 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("im gay")
+        let noodle = TicketDetailView(vehicle: vehiclesInRange[indexPath.row], parent: self)
+        self.navigationController?.view.addSubview(noodle)
     }
     
     // MARK: GMBLBeaconManagerDelegate methods
