@@ -338,7 +338,9 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
             print("YEETED")
         }
         
-        else if /*subscriptions.contains("") &&*/ identifier == "NNS6-34KS6" {
+        else if subscriptions.contains(where: { (subscription) -> Bool in
+            subscription.shortName == "768" && subscription.direction == "S"
+        }) && identifier == "NNS6-34KS6" {
             print("YOTE")
         }
         

@@ -75,6 +75,12 @@ class TicketDetailView: UIScrollView {
             self.addSubview(topLine)
             self.addSubview(bottomLine)
         } else if (vehicle.type == "Train") {
+            self.backgroundColor = UIColor(red: 32/255, green: 85/255, blue: 131/255, alpha: 1)
+            let stripeView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 20))
+            stripeView.backgroundColor = UIColor(white: 0, alpha: 0.3)
+            self.addSubview(stripeView)
+            self.sendSubview(toBack: stripeView)
+            
             logoImageView.image = UIImage(named: "amtrak_logo.png")
             transitTypeLabel.text = "Train"
             transitTypeLabel.textColor = .white
@@ -158,6 +164,9 @@ class TicketDetailView: UIScrollView {
         var origin: CGPoint = CGPoint(x: mapPadding, y: mapView.frame.maxY + 22)
         for stop in vehicle.routeStops {
             let rs = RouteStop(origin: origin, stopLabel: stop.name, timeLabel: secToTime(stop.time), viewWidth: width)
+            if vehicle.type == "Train" {
+                rs.timeLabel.textColor = .white
+            }
             self.addSubview(rs)
             origin.y += rs.frame.height
         }
