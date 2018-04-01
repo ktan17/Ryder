@@ -58,3 +58,18 @@ func secToTime(_ secondsFromNow: Int) -> String {
     let date = Date(timeIntervalSinceNow: TimeInterval(secondsFromNow))
     return dateFormatter.string(from: date)
 }
+
+struct Subscription: Hashable {
+    var hashValue: Int {
+        return shortName.hashValue
+    }
+    
+    static func ==(lhs: Subscription, rhs: Subscription) -> Bool {
+        return lhs.direction == rhs.direction && lhs.shortName == rhs.shortName
+    }
+    
+    var shortName: String
+    var direction: String // single-char code
+}
+
+let subscriptions = Set<Subscription>()
