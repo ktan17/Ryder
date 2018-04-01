@@ -271,8 +271,9 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let noodle = TicketDetailView(vehicle: vehiclesInRange[indexPath.row], parent: self.navigationController!.view)
-        self.navigationController?.view.addSubview(noodle)
+        let ticketDetailView = TicketDetailView(vehicle: vehiclesInRange[indexPath.row], parentFrame: (self.navigationController?.view)!)
+        ticketDetailView.delegate = self
+        self.navigationController?.view.addSubview(ticketDetailView)
     }
     
     // MARK: GMBLBeaconManagerDelegate methods
@@ -313,6 +314,16 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         
         timeouts[identifier] = 10
         beginTiming()
+    }
+    
+    // MARK: ScrollViewDelegate methods
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if let detailView = scrollView as? TicketDetailView {
+            if detailView.contentOffset.y <= -150 {
+                detailView.removeFromSuperview()
+            }
+        }
     }
 
 }
