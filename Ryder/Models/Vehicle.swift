@@ -13,10 +13,16 @@ class Vehicle: NSObject {
     var distance: Double!
     var url: String!
     var id: String
+    var nextStop: String
+    var type: String
     var time: Double = 0.0
     
-    init(id: String) {
+    init(id: String, nextStop: String, type: String) {
         self.id = id
+        self.nextStop = nextStop
+        self.type = type
+        
+        super.init()
     }
     
 }

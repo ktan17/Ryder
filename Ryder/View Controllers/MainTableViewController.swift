@@ -101,9 +101,19 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         let objects = Bundle.main.loadNibNamed("TicketViewCell", owner: self, options: nil)
         for object in objects ?? [] {
             if let cell = object as? TicketViewCell {
-                if indexPath.row == 1 {
-                    cell.backgroundImageView.image = UIImage(named: "blueticket")
+                let vehicle = vehiclesInRange[indexPath.row]
+                
+                if vehicle.type == "Bus" {
+                    cell.backgroundImageView.image = UIImage(named: "ticket_bus_metro")
+                    cell.transitTypeLabel.text = "Bus"
                 }
+                
+                else if vehicle.type == "Train" {
+                    cell.backgroundImageView.image = UIImage(named: "blueticket")
+                    cell.transitTypeLabel.text = "Train"
+                }
+                
+                cell.nextLocationLabel.text = vehicle.nextStop
                 
                 cell.selectionStyle = .none
                 cell.backgroundColor = .clear
@@ -127,50 +137,69 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     
     func beaconManager(_ manager: GMBLBeaconManager!, didReceive sighting: GMBLBeaconSighting!) {
         
-        func getRoute(from routeRef: DocumentReference) {
+        func getRoute(from routeRef: DocumentReference, id: String, nextStop: String) {
             routeRef.getDocument { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)
                     return
                 }
                 
-                if let snapshot = snapshot {
-                    print(snapshot.data()!["short_name"] as! String)
+                if let snapshot = snapshot, let agencyRef = snapshot.data()?["agency"] as? DocumentReference {
+                    getAgency(from: agencyRef, id: id, nextStop: nextStop)
                 }
             }
         }
         
-        //func getAgenc
+        func getAgency(from agencyRef: DocumentReference, id: String, nextStop: String) {
+            agencyRef.getDocument { (snapshot, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                if let snapshot = snapshot, let type = snapshot.data()?["type"] as? String {
+                    let vehicle = Vehicle(id: id, nextStop: nextStop, type: type)
+                    self.vehiclesInRange.append(vehicle)
+                    self.reloadTickets()
+                    
+                    self.timeouts[id] = 10
+                    self.beginTiming()
+                }
+            }
+        }
         
         guard let identifier = sighting.beacon.identifier else {
             return
         }
         
-        Firestore.firestore().collection("vehicles").getDocuments { (snapshot, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
+        if vehiclesInRange.contains(where: { $0.id == identifier }) {
+            timeouts[identifier] = 10
+            beginTiming()
+        }
+        
+        else {
             
-            if let snapshot = snapshot {
-                for document in snapshot.documents {
-                    if let id = document.data()["beaconID"] as? String, id == identifier {
-                        if let routeRef = document.data()["route"] as? DocumentReference {
-                            getRoute(from: routeRef)
+            Firestore.firestore().collection("vehicles").getDocuments { (snapshot, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                if let snapshot = snapshot {
+                    for document in snapshot.documents {
+                        if let id = document.data()["beaconID"] as? String,
+                            id == identifier,
+                            let nextStop = document.data()["nextStop"] as? String,
+                            let routeRef = document.data()["route"] as? DocumentReference {
+
+                            getRoute(from: routeRef, id: id, nextStop: nextStop)
+                            
                         }
                     }
                 }
             }
-        }
         
-        if !vehiclesInRange.contains(where: { $0.id == identifier }) {
-            let vehicle = Vehicle(id: identifier)
-            vehiclesInRange.append(vehicle)
-            self.reloadTickets()
         }
-        
-        timeouts[identifier] = 10
-        beginTiming()
         
     }
 
