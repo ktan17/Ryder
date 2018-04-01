@@ -26,6 +26,12 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         
         let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 202, height: 66))
         self.navigationItem.titleView = containerView
+        print(self.navigationController?.navigationBar.backgroundColor)
+        self.navigationController?.navigationBar.layer.masksToBounds = false
+        self.navigationController?.navigationBar.layer.shadowColor = Charcoal.cgColor
+        self.navigationController?.navigationBar.layer.shadowRadius = 4
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         
         let title = UIImage(named: "ryder")
         let titleImageView = UIImageView(image: title)
