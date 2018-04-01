@@ -42,6 +42,7 @@
 	<string>Ryder needs your location to find transit vehicles around you</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Poppins-Light.ttf</string>
 		<string>Poppins-Medium.ttf</string>
 		<string>Poppins-LightItalic.ttf</string>
 	</array>
