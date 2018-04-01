@@ -25,6 +25,8 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     var currentDetailId: String? = nil
     var oldStar = false
     
+    var firstTime = true
+    
     var timeouts = [String : Int]()
     var timer: Timer!
     
@@ -69,6 +71,11 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if firstTime {
+            firstTime = false
+            self.reloadTickets()
+        }
         
         if !noBluetooth {
             self.beaconManager.startListening()

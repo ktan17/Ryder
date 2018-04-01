@@ -53,10 +53,11 @@ class TicketViewCell: UITableViewCell {
         transitTypeLabel.text = vehicle.type
         directionLabel.text = vehicle.direction
         
-        if (!vehicle.isStarred) {
-            starImageView.isHidden = true
+        if let subscription = subscriptions.first(where: { $0.shortName == vehicle.routeNumber && $0.direction == String(vehicle.direction.first!) }) {
+            starImageView.isHidden = !subscription.isStarred
+            vehicle.isStarred = subscription.isStarred
         } else {
-            starImageView.isHidden = false
+            starImageView.isHidden = true
         }
         
         selectionStyle = .none
