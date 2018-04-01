@@ -51,7 +51,11 @@ class TicketViewCell: UITableViewCell {
         setLineSpacing(nextLocationLabel, text: vehicle.nextStop, lineHeightMultiple: 0.8)
         transitNumberLabel.text = vehicle.routeNumber
         transitTypeLabel.text = vehicle.type
-        directionLabel.text = vehicle.direction
+        var directionLabelText = vehicle.direction
+        if !vehicle.trainName.isEmpty {
+            directionLabelText = vehicle.trainName.uppercased() + " – " + directionLabelText
+        }
+        directionLabel.text = directionLabelText
         
         if let subscription = subscriptions.first(where: { $0.shortName == vehicle.routeNumber && $0.direction == String(vehicle.direction.first!) }) {
             starImageView.isHidden = !subscription.isStarred

@@ -136,10 +136,13 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                 let stops = (snapshot.data()?["stops"] as? [String : Any])?[String(direction.first!)] as? [String],
                 let agencyRef = snapshot.data()?["agency"] as? DocumentReference {
                 var route: String
+                var trainName: String
                 if Int(secondRouteNumber) != nil {
                     route = secondRouteNumber
+                    trainName = ""
                 } else {
                     route = routeNumber
+                    trainName = secondRouteNumber
                 }
                 
                 var stopData = [Vehicle.RouteStopData]()
@@ -157,12 +160,12 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                     }
                 }
                 
-                self.getAgency(from: agencyRef, id: id, nextStop: nextStop, direction: direction, routeNumber: route, routeStopData: stopData)
+                self.getAgency(from: agencyRef, id: id, nextStop: nextStop, direction: direction, routeNumber: route, trainName: trainName, routeStopData: stopData)
             }
         }
     }
     
-    private func getAgency(from agencyRef: DocumentReference, id: String, nextStop: String, direction: String, routeNumber: String, routeStopData: [Vehicle.RouteStopData]) {
+    private func getAgency(from agencyRef: DocumentReference, id: String, nextStop: String, direction: String, routeNumber: String, trainName: String, routeStopData: [Vehicle.RouteStopData]) {
         agencyRef.getDocument { (snapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -170,7 +173,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
             }
             
             if let snapshot = snapshot, let type = snapshot.data()?["type"] as? String {
-                let vehicle = Vehicle(id: id, nextStop: nextStop, type: type, direction: direction, routeNumber: routeNumber, routeStops: routeStopData)
+                let vehicle = Vehicle(id: id, nextStop: nextStop, type: type, direction: direction, routeNumber: routeNumber, trainName: trainName, routeStops: routeStopData)
                 self.vehiclesInRange.append(vehicle)
                 DispatchQueue.main.async {
                     self.reloadTickets()

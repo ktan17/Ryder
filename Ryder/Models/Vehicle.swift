@@ -19,15 +19,17 @@ class Vehicle: NSObject {
     var nextStop: String
     var type: String
     var routeNumber: String
+    var trainName: String = ""
     var direction: String
     var routeStops: [RouteStopData]
     var isStarred = false
     
-    init(id: String, nextStop: String, type: String, direction: String, routeNumber: String, routeStops: [RouteStopData]) {
+    init(id: String, nextStop: String, type: String, direction: String, routeNumber: String, trainName: String, routeStops: [RouteStopData]) {
         self.id = id
         self.nextStop = nextStop
         self.type = type
         self.routeNumber = routeNumber
+        self.trainName = trainName
         self.direction = direction
         self.routeStops = routeStops
         
