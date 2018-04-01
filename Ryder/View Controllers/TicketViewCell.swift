@@ -21,5 +21,24 @@ class TicketViewCell: UITableViewCell {
     @IBOutlet var topLine: UIView!
     @IBOutlet var bottomLine: UIView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        let attributedString = NSMutableAttributedString(string: "42 St. / Sepulveda Blvd.")
+        
+        // *** Create instance of `NSMutableParagraphStyle`
+        let paragraphStyle = NSMutableParagraphStyle()
+        
+        // *** set LineSpacing property in points ***
+        paragraphStyle.lineHeightMultiple = 0.8 // Whatever line spacing you want in points
+        
+        // *** Apply attribute to string ***
+        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+        
+        // *** Set Attributed String to your label ***
+        
+        nextLocationLabel.text = nil
+        nextLocationLabel.attributedText = attributedString;
+    }
     
 }

@@ -12,5 +12,11 @@ class Vehicle: NSObject {
     
     var distance: Double!
     var url: String!
+    var id: String
+    var time: Double = 0.0
+    
+    init(id: String) {
+        self.id = id
+    }
     
 }
