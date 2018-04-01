@@ -175,7 +175,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     
     func beaconManager(_ manager: GMBLBeaconManager!, didReceive sighting: GMBLBeaconSighting!) {
         
-        func getRoute(from routeRef: DocumentReference, id: String, nextStop: String, direction: String) {
+        func getRoute(from routeRef: DocumentReference, id: String, nextStop: String, direction: String, routeNumber: String) {
             routeRef.getDocument { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)
@@ -183,9 +183,15 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                 }
                 
                 if let snapshot = snapshot,
-                    let routeNumber = snapshot.data()?["short_name"] as? String,
+                    let secondRouteNumber = snapshot.data()?["short_name"] as? String,
                     let agencyRef = snapshot.data()?["agency"] as? DocumentReference {
-                    getAgency(from: agencyRef, id: id, nextStop: nextStop, direction: direction, routeNumber: routeNumber)
+                    var route: String
+                    if Int(secondRouteNumber) != nil {
+                        route = secondRouteNumber
+                    } else {
+                        route = routeNumber
+                    }
+                    getAgency(from: agencyRef, id: id, nextStop: nextStop, direction: direction, routeNumber: route)
                 }
             }
         }
@@ -235,9 +241,10 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                                 id == identifier,
                                 let nextStop = document.data()["nextStop"] as? String,
                                 let routeRef = document.data()["route"] as? DocumentReference,
+                                let routeNumber = document.data()["number"] as? String,
                                 let rawDirection = document.data()["direction"] as? String,
                                 let direction = getStringFromDirection(rawDirection) {
-                                getRoute(from: routeRef, id: id, nextStop: nextStop, direction: direction)
+                                getRoute(from: routeRef, id: id, nextStop: nextStop, direction: direction, routeNumber: routeNumber)
                             }
                         }
                     }
