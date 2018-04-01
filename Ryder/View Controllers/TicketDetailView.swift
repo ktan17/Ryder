@@ -150,7 +150,7 @@ class TicketDetailView: UIScrollView {
         let width = self.frame.width - 2*mapPadding
         var origin: CGPoint = CGPoint(x: mapPadding, y: mapView.frame.maxY + 22)
         for stop in vehicle.routeStops {
-            let rs = RouteStop(origin: origin, stopLabel: stop.name, timeLabel: String(stop.time), viewWidth: width)
+            let rs = RouteStop(origin: origin, stopLabel: stop.name, timeLabel: secToTime(stop.time), viewWidth: width)
             self.addSubview(rs)
             origin.y += rs.frame.height
         }

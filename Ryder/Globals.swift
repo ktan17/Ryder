@@ -50,3 +50,11 @@ func getStringFromDirection(_ direction: String) -> String? {
         return nil
     }
 }
+
+func secToTime(_ secondsFromNow: Int) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .none
+    dateFormatter.timeStyle = .short
+    let date = Date(timeIntervalSinceNow: TimeInterval(secondsFromNow))
+    return dateFormatter.string(from: date)
+}
