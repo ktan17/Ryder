@@ -20,6 +20,18 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Ryder needs your location to find transit vehicles around you</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Ryder needs your location to find transit vehicles around you</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Ryder needs your location to find transit vehicles around you</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Poppins-Light.ttf</string>
+		<string>Poppins-Medium.ttf</string>
+		<string>Poppins-LightItalic.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -33,18 +45,6 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Ryder needs your location to find transit vehicles around you</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Ryder needs your location to find transit vehicles around you</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Ryder needs your location to find transit vehicles around you</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Poppins-Light.ttf</string>
-		<string>Poppins-Medium.ttf</string>
-		<string>Poppins-LightItalic.ttf</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

@@ -10,6 +10,8 @@ import UIKit
 import Gimbal
 import FirebaseFirestore
 
+let noBluetooth = true
+
 class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate {
 
     private let cellPadding: CGFloat = 9
@@ -49,13 +51,19 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
         tableView.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0)
         
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: cellPadding))
+        
+        if noBluetooth {
+            createDummyVehicle()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.beaconManager.startListening()
-        self.beginRefreshingControl()
+        if !noBluetooth {
+            self.beaconManager.startListening()
+            self.beginRefreshingControl()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,6 +72,37 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     }
     
     // Helper Functions
+    
+    private func createDummyVehicle() {
+        let identifier = "MKTY-MM2M4"
+        
+        if !self.timeouts.keys.contains(identifier) {
+            
+            DispatchQueue.global(qos: .background).async {
+                Firestore.firestore().collection("vehicles").getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    
+                    if let snapshot = snapshot {
+                        for document in snapshot.documents {
+                            if let id = document.data()["beaconID"] as? String,
+                                id == identifier,
+                                let nextStop = document.data()["nextStop"] as? String,
+                                let routeRef = document.data()["route"] as? DocumentReference,
+                                let routeNumber = document.data()["number"] as? String,
+                                let rawDirection = document.data()["direction"] as? String,
+                                let direction = getStringFromDirection(rawDirection) {
+                                self.getRoute(from: routeRef, id: id, nextStop: nextStop, direction: direction, routeNumber: routeNumber)
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
     
     private func beginTiming() {
         if timer == nil {
@@ -167,7 +206,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let noodle = TicketDetailView(vehicle: vehiclesInRange[indexPath.row], parent: self)
+        let noodle = TicketDetailView(vehicle: vehiclesInRange[indexPath.row], parent: self.navigationController!.view)
         self.navigationController?.view.addSubview(noodle)
     }
     
@@ -238,7 +277,9 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                 }
             }
         }
-        
+    }
+    
+    func beaconManager(_ manager: GMBLBeaconManager!, didReceive sighting: GMBLBeaconSighting!) {
         guard let identifier = sighting.beacon.identifier else {
             return
         }

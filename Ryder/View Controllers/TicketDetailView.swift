@@ -11,7 +11,6 @@ import FirebaseFirestore
 
 class TicketDetailView: UIScrollView {
     
-    weak var parent: UIViewController?
     var m_vehicle: Vehicle!
     var logoImageView: UIImageView!
     var transitTypeLabel: UILabel!
@@ -24,16 +23,19 @@ class TicketDetailView: UIScrollView {
     var directionLabel: UILabel!
     var mapView: UIImageView!
     
+    var routeArray = [RouteStop]()
+    
     var topLine: UIView!
     var bottomLine: UIView!
     
     let padding: CGFloat = 20
     
-    init(vehicle: Vehicle, parent: UIViewController) {
+//    init(vehicle: Vehicle, allStops: [Vehicle.RouteStopData], parent: UIViewController) {
+    init(vehicle: Vehicle, parent: UIView) {
         self.m_vehicle = vehicle
         let statusBar = UIApplication.shared.statusBarFrame
         
-        super.init(frame: CGRect(x: padding, y: statusBar.height + padding/2, width: parent.view.frame.width - 2 * padding, height: parent.view.frame.height - 2 * padding))
+        super.init(frame: CGRect(x: padding, y: statusBar.height + padding/2, width: parent.frame.width - 2 * padding, height: parent.frame.height - 2 * padding))
         self.layer.cornerRadius = 8
         self.clipsToBounds = true
         
@@ -79,7 +81,7 @@ class TicketDetailView: UIScrollView {
         self.addSubview(transitTypeLabel)
         
         transitNumberLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 31, height: 26))
-        transitNumberLabel.text = vehicle.id
+        transitNumberLabel.text = vehicle.routeNumber
         transitNumberLabel.font = UIFont(name: "Poppins-Bold", size: 32.0)
         transitNumberLabel.textColor = .white
         transitNumberLabel.sizeToFit()
@@ -103,7 +105,7 @@ class TicketDetailView: UIScrollView {
         
         // destination
         nextLocationLabel.frame = CGRect(x: nextLabel.frame.minX, y: nextLabel.frame.maxY + 5, width: mapWidth, height: 90.0)
-        nextLocationLabel.text = vehicle.nextStop
+        setLineSpacing(nextLocationLabel, text: vehicle.nextStop, lineHeightMultiple: 0.8)
         nextLocationLabel.font = UIFont(name: "Poppins-Medium", size: 32.0)
         nextLocationLabel.textColor = .white
         nextLocationLabel.numberOfLines = 2
@@ -138,6 +140,39 @@ class TicketDetailView: UIScrollView {
             self.addSubview(starImageView)
         }
         
+//        allStops = [
+//            Vehicle.RouteStopData
+//        ]
+//        
+        // route stops
+        // FOR TEST
+        
+        let width = self.frame.width - 2*mapPadding
+        var origin: CGPoint = CGPoint(x: mapPadding, y: mapView.frame.maxY + 22)
+        for stop in vehicle.routeStops {
+            let rs = RouteStop(origin: origin, stopLabel: stop.name, timeLabel: String(stop.time), viewWidth: width)
+            self.addSubview(rs)
+            origin.y += rs.frame.height
+        }
+        
+        /*
+        let rs1 = RouteStop(origin: CGPoint.init(x: mapPadding, y: mapView.frame.maxY + 22), stopLabel: "Westwood SB & Lindbrook NS", timeLabel: "1:36 PM", viewWidth: width)
+        self.addSubview(rs1)
+        
+        let rs2 = RouteStop(origin: CGPoint.init(x: mapPadding, y: rs1.frame.maxY), stopLabel: "Wilshire/Federal", timeLabel: "12:02 AM", viewWidth: width)
+        self.addSubview(rs2)
+        
+        let rs3 = RouteStop(origin: CGPoint.init(x: mapPadding, y: rs2.frame.maxY), stopLabel: "Westwood SB & Lindbrook NS", timeLabel: "5:54 AM", viewWidth: width)
+        self.addSubview(rs3)
+        
+        self.contentSize = CGSize(width: self.frame.width, height: rs3.frame.maxY + 20)
+        
+        //allStops[0].
+        // actual loop
+//        for route in routeArray {
+//            let rs = RouteStop(origin: CGPoint, stopLabel: route.stop, timeLabel: route.time)
+//            self.addSubview(rs)
+//        }*/
     }
     
     @objc func clickStar() {
