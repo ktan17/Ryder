@@ -18,3 +18,35 @@ struct NextDest {
     static let nextBus = "NEXT STOP"
     static let nextTrain = "NEXT STATION"
 }
+
+func setLineSpacing(_ label: UILabel, text: String, lineHeightMultiple: CGFloat) {
+    let attributedString = NSMutableAttributedString(string: text)
+    
+    // *** Create instance of `NSMutableParagraphStyle`
+    let paragraphStyle = NSMutableParagraphStyle()
+    
+    // *** set LineSpacing property in points ***
+    paragraphStyle.lineHeightMultiple = lineHeightMultiple // Whatever line spacing you want in points
+    
+    // *** Apply attribute to string ***
+    attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+    
+    // *** Set Attributed String to your label ***
+    label.text = nil
+    label.attributedText = attributedString;
+}
+
+func getStringFromDirection(_ direction: String) -> String? {
+    switch direction {
+    case "N":
+        return "NORTHBOUND"
+    case "S":
+        return "SOUTHBOUND"
+    case "E":
+        return "EASTBOUND"
+    case "W":
+        return "WESTBOUND"
+    default:
+        return nil
+    }
+}

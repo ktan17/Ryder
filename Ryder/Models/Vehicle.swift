@@ -15,13 +15,16 @@ class Vehicle: NSObject {
     var id: String
     var nextStop: String
     var type: String
-    var time: Double = 0.0
+    var routeNumber: String
+    var direction: String
     var isStarred = false
     
-    init(id: String, nextStop: String, type: String) {
+    init(id: String, nextStop: String, type: String, direction: String, routeNumber: String) {
         self.id = id
         self.nextStop = nextStop
         self.type = type
+        self.direction = direction
+        self.routeNumber = routeNumber
         
         super.init()
     }

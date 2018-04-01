@@ -175,20 +175,22 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
     
     func beaconManager(_ manager: GMBLBeaconManager!, didReceive sighting: GMBLBeaconSighting!) {
         
-        func getRoute(from routeRef: DocumentReference, id: String, nextStop: String) {
+        func getRoute(from routeRef: DocumentReference, id: String, nextStop: String, direction: String) {
             routeRef.getDocument { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)
                     return
                 }
                 
-                if let snapshot = snapshot, let agencyRef = snapshot.data()?["agency"] as? DocumentReference {
-                    getAgency(from: agencyRef, id: id, nextStop: nextStop)
+                if let snapshot = snapshot,
+                    let routeNumber = snapshot.data()?["short_name"] as? String,
+                    let agencyRef = snapshot.data()?["agency"] as? DocumentReference {
+                    getAgency(from: agencyRef, id: id, nextStop: nextStop, direction: direction, routeNumber: routeNumber)
                 }
             }
         }
         
-        func getAgency(from agencyRef: DocumentReference, id: String, nextStop: String) {
+        func getAgency(from agencyRef: DocumentReference, id: String, nextStop: String, direction: String, routeNumber: String) {
             agencyRef.getDocument { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)
@@ -196,7 +198,7 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                 }
                 
                 if let snapshot = snapshot, let type = snapshot.data()?["type"] as? String {
-                    let vehicle = Vehicle(id: id, nextStop: nextStop, type: type)
+                    let vehicle = Vehicle(id: id, nextStop: nextStop, type: type, direction: direction, routeNumber: routeNumber)
                     self.vehiclesInRange.append(vehicle)
                     DispatchQueue.main.async {
                         self.reloadTickets()
@@ -232,8 +234,10 @@ class MainTableViewController: UITableViewController, GMBLBeaconManagerDelegate 
                             if let id = document.data()["beaconID"] as? String,
                                 id == identifier,
                                 let nextStop = document.data()["nextStop"] as? String,
-                                let routeRef = document.data()["route"] as? DocumentReference {
-                                getRoute(from: routeRef, id: id, nextStop: nextStop)
+                                let routeRef = document.data()["route"] as? DocumentReference,
+                                let rawDirection = document.data()["direction"] as? String,
+                                let direction = getStringFromDirection(rawDirection) {
+                                getRoute(from: routeRef, id: id, nextStop: nextStop, direction: direction)
                             }
                         }
                     }

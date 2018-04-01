@@ -17,6 +17,7 @@ class TicketViewCell: UITableViewCell {
     @IBOutlet var starImageView: UIImageView!
     @IBOutlet var nextLabel: UILabel!
     @IBOutlet var nextLocationLabel: UILabel!
+    @IBOutlet var directionLabel: UILabel!
     
     @IBOutlet var topLine: UIView!
     @IBOutlet var bottomLine: UIView!
@@ -47,6 +48,7 @@ class TicketViewCell: UITableViewCell {
             }
             logoImageView.image = UIImage(named: "metro_logo")
             transitTypeLabel.textColor = Charcoal
+            nextLabel.text = NextDest.nextBus
             
             topLine.isHidden = false
             bottomLine.isHidden = false
@@ -59,12 +61,14 @@ class TicketViewCell: UITableViewCell {
             }
             logoImageView.image = UIImage(named: "amtrak_logo")
             transitTypeLabel.textColor = .white
+            nextLabel.text = NextDest.nextTrain
             
             topLine.isHidden = true
             bottomLine.isHidden = true
         }
         setNextStopText(vehicle.nextStop)
         transitTypeLabel.text = vehicle.type
+        directionLabel.text = vehicle.direction
         
         selectionStyle = .none
         backgroundColor = .clear
